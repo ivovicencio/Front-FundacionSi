@@ -1,1 +1,114 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Colores Principales - Fundación Sí */
+  --fs-purple: #6a2fb3;
+  --fs-purple-light: #8a59cf;
+  --fs-purple-dark: #4a1f80;
+  --fs-yellow: #ffd800;
+  --fs-yellow-light: #ffea6e;
+  
+  /* Paleta de Grises y UI */
+  --fs-bg: #f8f9fa;
+  --fs-ink: #212529;
+  --fs-muted: #6c757d;
+  --fs-white: #ffffff;
+  --fs-border: rgba(106, 47, 179, 0.15);
+  
+  /* Sombras */
+  --fs-shadow: 0 4px 12px rgba(106, 47, 179, 0.08);
+  --fs-shadow-lg: 0 8px 24px rgba(106, 47, 179, 0.12);
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--fs-bg);
+  color: var(--fs-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--fs-purple-dark);
+  letter-spacing: -0.02em;
+}
+
+/* Contenedor*/
+.container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 1.5rem;
+}
+
+
+.fs-card {
+  background: var(--fs-white);
+  border-radius: 16px;
+  border: 1px solid var(--fs-border);
+  box-shadow: var(--fs-shadow);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--fs-shadow-lg);
+}
+
+/* Botones con los colores de la marca */
+.btn-fs-primary {
+  background-color: var(--fs-purple);
+  color: var(--fs-white);
+  border: none;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+  transition: background-color 0.2s;
+}
+
+.btn-fs-primary:hover {
+  background-color: var(--fs-purple-dark);
+  color: var(--fs-white);
+}
+
+.btn-fs-accent {
+  background-color: var(--fs-yellow);
+  color: var(--fs-purple-dark);
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+}
+
+/* Scrollbars personalizados para las listas de comida */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fs-border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fs-purple-light);
+}
+
+/* Utilidad para impresión (Menú) */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}

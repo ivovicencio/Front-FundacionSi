@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Stock } from './stock';
+import { ConteoSemanal } from './conteo-semanal';
 
-describe('Stock', () => {
-  let component: Stock;
-  let fixture: ComponentFixture<Stock>;
+describe('ConteoSemanal', () => {
+  let component: ConteoSemanal;
+  let fixture: ComponentFixture<ConteoSemanal>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Stock],
+      imports: [ConteoSemanal],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Stock);
+    fixture = TestBed.createComponent(ConteoSemanal);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
