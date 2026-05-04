@@ -1,1 +1,76 @@
-<p>menu-view works!</p>
+@if (modalPdfVisible) {
+  <div class="pdf-modal-backdrop" (click)="cerrarModalPdf()"></div>
+  <div class="pdf-modal">
+    <div class="pdf-modal__accent"></div>
+    <h2 class="pdf-modal__title">¡Listo!</h2>
+    <p class="pdf-modal__text">El PDF se descargó correctamente.</p>
+    <button type="button" class="pdf-modal__btn" (click)="cerrarModalPdf()">Aceptar</button>
+  </div>
+}
+
+@if (menuData) {
+  <div class="menu-page py-4 py-lg-5 px-3 px-lg-5">
+    <div class="hero-panel mb-4 shadow-sm">
+      <div class="hero-inner row g-4 align-items-center">
+        <div class="col-lg-8">
+          <h1 class="hero-title">Menú semanal</h1>
+          <p class="hero-note">Consultá el menú que arma residencia (stock / administración). Podés descargar el PDF.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <button type="button" class="btn btn-pdf-glow btn-sm" (click)="exportarPDF()" [disabled]="generandoPDF">
+            <i class="bi bi-download me-1"></i> Descargar PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="menu-export" class="menu-card shadow-lg">
+      <div class="menu-card-accent"></div>
+      <div class="text-center mb-4">
+        <h2 class="print-title-visible" style="font-size: 1.5rem; color: var(--fs-morado); font-weight: 800;">Fundación Sí — Menú Semanal</h2>
+        <p class="rango-export"><strong>Vigencia:</strong> {{ rangoEditable }}</p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="menu-table">
+          <thead>
+            <tr>
+              <th class="th-corner">Turno</th>
+              @for (dia of menuData.dias; track dia.diaNombre) {
+                <th class="th-dia">{{ dia.diaNombre }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="th-turno">Almuerzo</th>
+              @for (dia of menuData.dias; track dia.diaNombre) {
+                <td>
+                  <div class="celda-plato" [class.celda-carne-si]="dia.almuerzo.conCarne" [class.celda-carne-no]="!dia.almuerzo.conCarne">
+                    <span class="chip" [class.chip-carne]="dia.almuerzo.conCarne" [class.chip-veg]="!dia.almuerzo.conCarne">
+                      {{ dia.almuerzo.conCarne ? 'Carne' : 'Sin Carne' }}
+                    </span>
+                    <p class="plato-texto">{{ dia.almuerzo.texto || '—' }}</p>
+                  </div>
+                </td>
+              }
+            </tr>
+            <tr>
+              <th class="th-turno">Cena</th>
+              @for (dia of menuData.dias; track dia.diaNombre) {
+                <td>
+                  <div class="celda-plato" [class.celda-carne-si]="dia.cena.conCarne" [class.celda-carne-no]="!dia.cena.conCarne">
+                    <span class="chip" [class.chip-carne]="dia.cena.conCarne" [class.chip-veg]="!dia.cena.conCarne">
+                      {{ dia.cena.conCarne ? 'Carne' : 'Sin Carne' }}
+                    </span>
+                    <p class="plato-texto">{{ dia.cena.texto || '—' }}</p>
+                  </div>
+                </td>
+              }
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+}

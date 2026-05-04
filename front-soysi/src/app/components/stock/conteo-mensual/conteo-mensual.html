@@ -1,1 +1,88 @@
-<p>conteo-mensual works!</p>
+<section class="panel">
+    <div class="panel-header">
+        <div>
+            <h3>Conteo Mensual (Depósito)</h3>
+            <p class="subtitle">Inventario general de depósito para apertura/cierre del turno mensual de stock</p>
+        </div>
+        <div class="controls">
+            <button class="btn-base btn-accent" (click)="agregarItem()">
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                <span class="visually-hidden">Agregar fila</span>
+                <span class="btn-label"> Agregar fila</span>
+            </button>
+            <button class="btn-base btn-primary" (click)="guardarConteo()">
+                <i class="bi bi-save" aria-hidden="true"></i>
+                <span class="visually-hidden">Guardar conteo</span>
+                <span class="btn-label"> Guardar Conteo</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Estado (HAY?)</th>
+                    <th>Peso Neto</th>
+                    <th>Cant. Paquetes</th>
+                    <th>Fardos</th>
+                    <th>Total Calc.</th>
+                    <th>Unidad</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items; let i = index"
+                    [class.estado-M]="item.estadoHay === 'M'"
+                    [class.estado-P]="item.estadoHay === 'P'"
+                    [class.estado-N]="item.estadoHay === 'N'">
+                    
+                    <td class="col-producto">
+                        <input type="text" [(ngModel)]="item.nombreProducto" (ngModelChange)="calcularTotal(item)" placeholder="Ej. Arroz">
+                    </td>
+                    
+                    <td class="col-select">
+                        <select [(ngModel)]="item.estadoHay" (change)="calcularTotal(item)">
+                            <option value="M">M (Mucho)</option>
+                            <option value="P">P (Poco)</option>
+                            <option value="N">N (Nada)</option>
+                        </select>
+                    </td>
+                    
+                    <td>
+                        <input type="number" min="0" [(ngModel)]="item.pesoNeto" (ngModelChange)="calcularTotal(item)">
+                    </td>
+                    
+                    <td>
+                        <input type="number" min="0" [(ngModel)]="item.cantidadPaquetes" (ngModelChange)="calcularTotal(item)">
+                    </td>
+                    
+                    <td>
+                        <input type="number" min="0" [(ngModel)]="item.fardos" (ngModelChange)="calcularTotal(item)">
+                    </td>
+                    
+                    <td class="total-cell">
+                        {{ formatTotal(item) }}
+                    </td>
+                    
+                    <td class="col-select">
+                        <select [(ngModel)]="item.unidad" (change)="calcularTotal(item)">
+                            <option value="KG">Kg</option>
+                            <option value="G">Gramos</option>
+                            <option value="L">Litros</option>
+                            <option value="ML">ML</option>
+                            <option value="UNIDAD">Unidades</option>
+                        </select>
+                    </td>
+                    
+                    <td class="col-accion">
+                        <button class="btn-delete" (click)="removeItem(i)" title="Eliminar fila">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

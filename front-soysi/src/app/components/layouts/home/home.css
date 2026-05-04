@@ -1,0 +1,74 @@
+.home-container {
+  padding-bottom: 3rem;
+}
+
+.home-hero {
+  background: linear-gradient(rgba(106, 47, 179, 0.9), rgba(74, 31, 128, 0.95)), 
+              url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(106, 47, 179, 0.2);
+}
+
+.text-yellow { color: #ffd800; }
+
+.access-card {
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  text-align: center;
+  border: 1px solid rgba(106, 47, 179, 0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.access-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(106, 47, 179, 0.15);
+  border-color: #6a2fb3;
+}
+
+.icon-wrap {
+  width: 60px;
+  height: 60px;
+  background: rgba(106, 47, 179, 0.1);
+  color: #6a2fb3;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  margin-bottom: 1.2rem;
+}
+
+.access-card h3 {
+  font-weight: 800;
+  color: #4a1f80;
+  font-size: 1.25rem;
+}
+
+/* Tarjeta Amarilla (Encuesta) */
+.access-card.accent { background: #ffd800; border: none; }
+.access-card.accent .icon-wrap { background: rgba(106, 47, 179, 0.15); }
+
+/* Tarjeta Admin Especial (Usuarios) */
+.access-card.special { border: 2px dashed #6a2fb3; background: #f8f9fa; }
+
+/* Tarjeta Nueva (Equipos/Asignar) */
+.access-card.team-card { border: 2px solid #6a2fb3; }
+.access-card.team-card .icon-wrap { background: #6a2fb3; color: white; }
+
+.fs-divider {
+  border-top: 2px solid #6a2fb3;
+  width: 50px;
+  margin: 2rem auto;
+  opacity: 0.3;
+}

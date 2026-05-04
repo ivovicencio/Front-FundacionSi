@@ -1,1 +1,18 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark main-nav">
+    <div class="container d-flex justify-content-between align-items-center">
+
+       <!-- brand con identidad de soy si -->
+        <a class="navbar-brand d-flex align-items-center" routerLink="/home">
+            <div class="brand-badge me-2">S</div>
+            <span class="brand-name">Soy<span class="text-yellow">Sí</span></span>
+        </a>
+
+        <!-- PERFIL CON DECORADO SI ES RESIDENTE CON CARGO DE STOCK -->
+        <div class="user-profile-wrapper">
+            <div class="user-profile" [class.stock-glow]="usuario.esStockActivo">
+                <span class="user-initials">{{ usuario.nombre.charAt(0) }}</span>
+            </div>
+        </div>
+    </div>
+
+</nav>

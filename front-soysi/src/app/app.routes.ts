@@ -33,22 +33,22 @@ export const routes: Routes = [
   // Dashboard Principal
   { path: 'home', component: Home },
 
-  // Módulo de Menú
+  //  Menú
   { path: 'menu/view', component: MenuView },
   { path: 'menu/editor', component: MenuEditor },
 
-  // Módulo de Stock y Conteos
+  //  Stock y Conteos
   { path: 'stock/semanal', component: ConteoSemanal },
   { path: 'stock/mensual', component: ConteoMensual },
   { path: 'stock/ocasa', component: ConteoOcasa },
   { path: 'stock/pedidos', component: PedidosGenerados },
   { path: 'stock/asignar-grupo', component: AsignarStock },
 
-  // Módulo de Asistencias
+  //  Asistencias
   { path: 'asistencia/form', component: AsistenciaForm },
   { path: 'asistencia/panel', component: AsistenciaPanel },
 
-  // Módulo de Encuestas
+  //  Encuestas
   { path: 'encuesta', component: Encuesta },
   { path: 'boletos/solicitud', component: Boletos },
 

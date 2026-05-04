@@ -1,0 +1,175 @@
+/* --- COMPONENTE CONTEO DEPOSITO (Integrado a SoySí) --- */
+
+section.panel {
+    /* Usamos tu clase global de tarjeta */
+    background: var(--fs-white);
+    border-radius: 16px;
+    border: 1px solid var(--fs-border);
+    box-shadow: var(--fs-shadow);
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.panel h3 {
+    margin: 0;
+    color: var(--fs-purple-dark);
+    font-size: 1.5rem;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0 0;
+    color: var(--fs-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* --- BOTONES (Usando tus clases globales) --- */
+.controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Mapeo tus clases a tus botones específicos */
+.btn-accent {
+    background-color: var(--fs-yellow);
+    color: var(--fs-purple-dark);
+    border: none;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0.6rem 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-accent:hover {
+    background-color: var(--fs-yellow-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 216, 0, 0.3);
+}
+
+.btn-primary {
+    background-color: var(--fs-purple);
+    color: var(--fs-white);
+    border: none;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.6rem 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--fs-purple-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(106, 47, 179, 0.3);
+}
+
+/* --- TABLA INTEGRADA --- */
+.table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--fs-border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--fs-white);
+}
+
+thead th {
+    background-color: var(--fs-purple-dark);
+    color: var(--fs-white);
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--fs-border);
+    vertical-align: middle;
+}
+
+/* --- INPUTS Y SELECTS --- */
+input[type="text"], 
+input[type="number"], 
+select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: var(--fs-ink);
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--fs-purple);
+    box-shadow: 0 0 0 3px rgba(106, 47, 179, 0.1);
+}
+
+/* --- ESTADOS (MUESTRAS VISUALES) --- */
+/* M (Mucho): Borde amarillo sutil */
+.estado-M { background-color: rgba(255, 216, 0, 0.05); }
+.estado-M td:first-child { border-left: 4px solid var(--fs-yellow); }
+
+/* P (Poco): Borde morado sutil */
+.estado-P { background-color: rgba(106, 47, 179, 0.03); }
+.estado-P td:first-child { border-left: 4px solid var(--fs-purple-light); }
+
+/* N (Nada): Fondo grisáceo */
+.estado-N { background-color: #f9f9f9; opacity: 0.8; }
+.estado-N td:first-child { border-left: 4px solid var(--fs-muted); }
+
+/* Celda de Total */
+.total-cell {
+    font-weight: 800;
+    color: var(--fs-purple);
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Botón Eliminar */
+.btn-delete {
+    background: transparent;
+    color: var(--fs-purple);
+    border: 1.5px solid var(--fs-purple);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: var(--fs-purple);
+    color: var(--fs-white);
+}
+
+/* Ajustes Responsive */
+@media (max-width: 768px) {
+    .panel-header { flex-direction: column; align-items: flex-start; }
+    .controls { width: 100%; }
+    .btn-base { flex: 1; justify-content: center; }
+}

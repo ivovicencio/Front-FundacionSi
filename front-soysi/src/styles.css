@@ -1,4 +1,10 @@
 :root {
+  /* Menú (proyecto `menu` — mismas variables que menu-component) */
+  --fs-morado: #6b338a;
+  --fs-amarillo: #f1b51c;
+  --fs-fondo: #f3f0f7;
+  --fs-font-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
   /* Colores Principales - Fundación Sí */
   --fs-purple: #6a2fb3;
   --fs-purple-light: #8a59cf;

@@ -1,1 +1,67 @@
-<p>conteo-semanal works!</p>
+<section class="panel">
+  <div class="panel-header">
+    <div>
+      <h3>Conteo Semanal / Quincenal</h3>
+      <p class="subtitle">Registro de stock semanal. Complete las cantidades y genere pedido sugerido.</p>
+    </div>
+    <div class="controls">
+      <button class="btn-base btn-accent" (click)="agregarItem()">Agregar fila</button>
+      <button class="btn-base btn-primary" (click)="confirmarConteo()">Guardar conteo</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Categoria</th>
+          <th>Cantidad actual</th>
+          <th>Objetivo</th>
+          <th>Unidad</th>
+          <th>Pedido sugerido</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items; let i = index">
+          <td>
+            <input type="text" [(ngModel)]="item.nombre" placeholder="Ej. Tomate">
+          </td>
+          <td>
+            <select [(ngModel)]="item.categoria">
+              <option value="VERDURA">Verdura</option>
+              <option value="FRUTA">Fruta</option>
+              <option value="HUEVO">Huevo</option>
+              <option value="QUESO">Queso</option>
+              <option value="CARNE_ROJA">Carne roja</option>
+              <option value="POLLO">Pollo</option>
+            </select>
+          </td>
+          <td>
+            <input type="number" min="0" [(ngModel)]="item.cantidadActual">
+          </td>
+          <td>
+            <input type="number" min="0" [(ngModel)]="item.cantidadObjetivo">
+          </td>
+          <td class="col-select">
+            <select [(ngModel)]="item.unidad">
+              <option value="KG">Kg</option>
+              <option value="G">G</option>
+              <option value="L">L</option>
+              <option value="ML">ML</option>
+              <option value="UNIDAD">Unidades</option>
+              <option value="MAPLE">Maple</option>
+            </select>
+          </td>
+          <td class="total-cell">
+            {{ formatPedido(item) }}
+          </td>
+          <td class="col-accion">
+            <button class="btn-delete" (click)="removeItem(i)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
