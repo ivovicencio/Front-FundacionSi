@@ -8,7 +8,6 @@
   </div>
 }
 
-@if (menuData) {
 <div class="menu-page py-4 py-lg-5 px-3 px-lg-5">
   <div class="hero-panel mb-4 shadow-sm">
     <div class="hero-inner row g-4 align-items-center">
@@ -79,7 +78,7 @@
           <tr>
             <th class="th-turno">Almuerzo</th>
             @for (dia of menuData.dias; let i = $index; track dia.diaNombre) {
-              <td style="position: relative;">
+                <td style="position: relative;">
                 @if (dia.almuerzo.texto) {
                   <button class="btn-quitar" (click)="quitarPlato(i, 'almuerzo')" title="Quitar plato">×</button>
                 }
@@ -113,4 +112,3 @@
     </div>
   </div>
 </div>
-}

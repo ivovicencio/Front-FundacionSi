@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; // Preparado para API
+import { HttpClientModule } from '@angular/common/http'; //preparado para la api
 
 interface Residente {
   id: number;
   nombre: string;
-  rol: 'ADMIN' | 'RESIDENTE_STOCK' | 'RESIDENTE'; // Alineado con backend v1.1
+  rol: 'ADMIN' | 'RESIDENTE_STOCK' | 'RESIDENTE'; 
 }
 
 @Component({
@@ -22,57 +22,66 @@ export class AsignarStock implements OnInit {
   grupoActualActivo: boolean = false;
   loading: boolean = false;
 
+
+  //define la cantidad minima requerida por regla de negocio
+  readonly MINIMO_INTEGRANTES = 3;
+
   constructor() { }
 
+  //al iniciar, ejecuta la carga de datos del servidor
   ngOnInit(): void {
     this.cargarDatos();
   }
 
+  //trae los datos desde el back
   cargarDatos(): void {
     this.loading = true;
-    // Aquí irían las llamadas reales:
-    // this.userService.getResidentes().subscribe(...)
-    // this.stockGroupService.getActive().subscribe(...)
-    
-    // Mock temporal alineado a la documentación
-    this.residentesDisponibles = [
-      { id: 1, nombre: 'Juan Pérez', rol: 'RESIDENTE' },
-      { id: 2, nombre: 'Marta Gómez', rol: 'RESIDENTE' },
-      { id: 3, nombre: 'Pedro Armella', rol: 'RESIDENTE' },
-      { id: 4, nombre: 'Lucía Sosa', rol: 'RESIDENTE' },
-      { id: 5, nombre: 'Franco Martínez', rol: 'RESIDENTE' }
-    ];
+  
+    //NOTA: aca se va a conectar con los servicios
+    //por ejemplo forkJoin([this.userService.getDisponibles()
+    this.residentesDisponibles = [] //inicializar vacio para recibir los datos
     this.loading = false;
   }
 
+  //agrega o remueve el residente de la seleccion, no es necesario que sea 3 pero el minimo es 3
   toggleSeleccion(resi: Residente): void {
-    const isSelected = this.grupoSeleccionado.some(r => r.id === resi.id);
-    
-    if (isSelected) {
+    const yaSeleccionado = this.grupoSeleccionado.some(r => r.id === resi.id);
+
+    if (yaSeleccionado) {
       this.grupoSeleccionado = this.grupoSeleccionado.filter(r => r.id !== resi.id);
     } else {
-      if (this.grupoSeleccionado.length < 3) {
-        this.grupoSeleccionado = [...this.grupoSeleccionado, resi];
-      }
+      this.grupoSeleccionado = [...this.grupoSeleccionado, resi];
     }
   }
-
-  confirmarGrupo(): void {
-    if (this.grupoSeleccionado.length !== 3) return;
-
-    this.loading = true;
-    // Simulación de POST /stock-group
-    setTimeout(() => {
-      console.log('Enviando a Backend:', this.grupoSeleccionado);
-      this.grupoActualActivo = true;
-      this.grupoSeleccionado = [];
-      this.loading = false;
-      // Aquí dispararías un Toast o notificación profesional
-    }, 1000);
+// valida que se cumpla el minimo de integrantes
+  get esGrupoValido(): boolean {
+    return this.grupoSeleccionado.length >= this.MINIMO_INTEGRANTES;
   }
 
+  //envia el nuevo grupo con 3 integrantes al backend
+  confirmarGrupo(): void {
+    if (!this.esGrupoValido) return;
+
+    this.loading = true;
+    
+    //aca se conecta el post enviando los ids 
+    console.log('Enviando grupo al backend:', this.grupoSeleccionado);
+
+    this.grupoActualActivo = true;
+    this.grupoSeleccionado = [];
+    this.loading = false;
+  }
+
+  
+
+  
+
+  //finaliza el turno del grupo mediante la api
   eliminarGrupoActual(): void {
-    // Aquí llamarías a DELETE o PUT /stock-group/finalizar
+    this.loading = true;
+
+    //aca se va a esperar al DELETE
     this.grupoActualActivo = false;
+    this.loading = false;
   }
 }

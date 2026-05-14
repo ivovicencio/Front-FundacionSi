@@ -30,8 +30,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/components/menu/menu-shared.css"
+              "src/styles.css"
             ]
           },
           "configurations": {

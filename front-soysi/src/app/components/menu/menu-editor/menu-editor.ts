@@ -15,14 +15,13 @@ import { StorageService } from '../../../services/storage';
 })
 export class MenuEditor implements OnInit {
   private ngZone = inject(NgZone);
-  private router = inject(Router);
   private readonly storageKey = 'hoysecome_manual_final_v2';
-  private storage = inject(StorageService);
 
   menuData!: SemanaMenu;
   rangoEditable = 'Lunes 30/03/2026 al Domingo 05/04/2026';
   generandoPDF = false;
   modalPdfVisible = false;
+  modalPdfError = false;
   lunesEmpiezaConCarne = true;
 
   readonly nombresDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -76,7 +75,7 @@ export class MenuEditor implements OnInit {
     'Ñoquis con salsa de carne',
     'Puchero a la olla con puré (Osobuco)',
     'Puchero completo con verduras (Osobuco)',
-    'Sopa completa con carne y verduras',
+    'Sopa completa con carne y verduras'
   ];
 
   readonly comidasSinCarne = [
@@ -99,23 +98,10 @@ export class MenuEditor implements OnInit {
     'Fideos con crema y queso',
     'Arroz con verduras salteadas',
     'Arroz con salsa y queso',
-    'Papas rellenas',
+    'Papas rellenas'
   ];
 
-  usuario = {
-    nombre: 'Ivo Vicencio',
-    rol: 'RESIDENTE_NORMAL' as 'ADMIN' | 'RESIDENTE_STOCK' | 'RESIDENTE_NORMAL',
-  };
-
-  get puedeEditarMenu(): boolean {
-    return this.usuario.rol === 'ADMIN' || this.usuario.rol === 'RESIDENTE_STOCK';
-  }
-
   ngOnInit(): void {
-    if (!this.puedeEditarMenu) {
-      void this.router.navigate(['/menu/view']);
-      return;
-    }
     if (!this.cargarEstado()) {
       this.limpiarMenu();
     }
@@ -128,7 +114,7 @@ export class MenuEditor implements OnInit {
         diaNombre,
         fechaStr: '',
         almuerzo: { texto: '', conCarne: almuerzoConCarne },
-        cena: { texto: '', conCarne: !almuerzoConCarne },
+        cena: { texto: '', conCarne: !almuerzoConCarne }
       };
     });
     this.menuData = { rangoFechas: this.rangoEditable, fechaInicio: '', fechaFin: '', dias };
@@ -146,7 +132,7 @@ export class MenuEditor implements OnInit {
   }
 
   seleccionarComida(nombre: string, conCarne: boolean): void {
-    for (const dia of this.menuData.dias) {
+    for (let dia of this.menuData.dias) {
       if (dia.almuerzo.conCarne === conCarne && dia.almuerzo.texto === '') {
         dia.almuerzo.texto = nombre;
         this.guardarEstado();
@@ -182,72 +168,66 @@ export class MenuEditor implements OnInit {
       return;
     }
 
+    // Guardamos dimensiones originales para restaurar después
     const originalStyle = data.getAttribute('style') || '';
-
+    
+    // Forzamos el ancho de escritorio para la captura
     data.style.width = '1200px';
     data.style.maxWidth = 'none';
 
-    html2canvas(data, {
-      scale: 2,
+    html2canvas(data, { 
+      scale: 2, 
       windowWidth: 1200,
       useCORS: true,
-      backgroundColor: '#ffffff',
-    })
-      .then((canvas) => {
-        data.setAttribute('style', originalStyle);
+      backgroundColor: '#ffffff'
+    }).then((canvas) => {
+      // Restauramos el estilo original
+      data.setAttribute('style', originalStyle);
 
-        const pdf = new jsPDF('l', 'mm', 'a4');
-        const imgWidth = 297;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const pdf = new jsPDF('l', 'mm', 'a4');
+      const imgWidth = 297; 
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      // Ajuste de posición vertical para centrar si la tabla es corta
+      const yPos = imgHeight < 210 ? (210 - imgHeight) / 2 : 10;
 
-        const yPos = imgHeight < 210 ? (210 - imgHeight) / 2 : 10;
-
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, yPos, imgWidth, imgHeight);
-        pdf.save(`Menu_${this.rangoEditable.replace(/\//g, '-')}.pdf`);
-
-        this.ngZone.run(() => {
-          this.generandoPDF = false;
-          this.modalPdfVisible = true;
-        });
-      })
-      .catch((err) => {
-        console.error('Error al exportar PDF:', err);
-        data.setAttribute('style', originalStyle);
-        this.ngZone.run(() => {
-          this.generandoPDF = false;
-        });
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, yPos, imgWidth, imgHeight);
+      pdf.save(`Menu_${this.rangoEditable.replace(/\//g, '-')}.pdf`);
+      
+      this.ngZone.run(() => { 
+        this.generandoPDF = false; 
+        this.modalPdfVisible = true; 
       });
+    }).catch(err => {
+      console.error('Error al exportar PDF:', err);
+      data.setAttribute('style', originalStyle);
+      this.ngZone.run(() => {
+        this.generandoPDF = false;
+        this.modalPdfError = true;
+      });
+    });
   }
 
-  cerrarModalPdf(): void {
-    this.modalPdfVisible = false;
-  }
+  cerrarModalPdf(): void { this.modalPdfVisible = false; }
 
   private guardarEstado(): void {
-    this.storage.setItem(
-      this.storageKey,
-      JSON.stringify({
-        rangoEditable: this.rangoEditable,
-        menuData: this.menuData,
-        lunesEmpiezaConCarne: this.lunesEmpiezaConCarne,
-      })
-    );
+    localStorage.setItem(this.storageKey, JSON.stringify({
+      rangoEditable: this.rangoEditable,
+      menuData: this.menuData,
+      lunesEmpiezaConCarne: this.lunesEmpiezaConCarne
+    }));
   }
 
   private cargarEstado(): boolean {
-    const raw = this.storage.getItem(this.storageKey);
+    const raw = localStorage.getItem(this.storageKey);
     if (!raw) return false;
     try {
-      const data = JSON.parse(raw) as {
-        rangoEditable: string;
-        menuData: SemanaMenu;
-        lunesEmpiezaConCarne: boolean;
-      };
+      const data = JSON.parse(raw);
       this.rangoEditable = data.rangoEditable;
       this.menuData = data.menuData;
       this.lunesEmpiezaConCarne = data.lunesEmpiezaConCarne;
       return true;
-    } catch {
+    } catch (e) {
       return false;
     }
   }

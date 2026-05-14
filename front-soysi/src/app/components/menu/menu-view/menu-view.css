@@ -1,0 +1,233 @@
+/* --- COMPONENTE MENU-VIEW (SOYSÍ) --- */
+
+/* Panel Superior Solo Lectura */
+.hero-panel {
+  background: linear-gradient(135deg, var(--fs-purple-dark), var(--fs-purple));
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  color: var(--fs-white);
+  box-shadow: var(--fs-shadow-lg);
+}
+
+.hero-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--fs-yellow);
+  margin-bottom: 0.5rem;
+}
+
+.hero-note {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin: 0;
+  max-width: 650px;
+}
+
+/* Botón de Descarga PDF */
+.btn-pdf-glow {
+  background: var(--fs-yellow);
+  color: var(--fs-purple-dark);
+  border: none;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 0.55rem 1.1rem;
+  box-shadow: 0 4px 15px rgba(255, 216, 0, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-pdf-glow:hover:not(:disabled) {
+  background: var(--fs-white);
+  color: var(--fs-purple-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+.btn-pdf-glow:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* La Tarjeta del Menú Semanal */
+.menu-card {
+  background: var(--fs-white);
+  border-radius: 20px;
+  border: 1px solid var(--fs-border);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--fs-purple), var(--fs-yellow));
+}
+
+.rango-export {
+  font-size: 0.95rem;
+  color: var(--fs-muted);
+  margin-top: 0.25rem;
+}
+
+/* Contenedor de la Tabla con Scroll Lateral en Celulares */
+.table-scroll {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--fs-border);
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--fs-white);
+  min-width: 850px;
+}
+
+.menu-table th, 
+.menu-table td {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--fs-border);
+}
+
+.th-corner, .th-turno {
+  background-color: rgba(106, 47, 179, 0.04);
+  color: var(--fs-purple-dark);
+  font-weight: 800;
+  width: 110px;
+}
+
+.th-dia {
+  background-color: var(--fs-purple);
+  color: var(--fs-white);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Bloques de Platos Estáticos */
+.celda-plato {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  min-height: 85px;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.celda-carne-si { background-color: rgba(106, 47, 179, 0.03); }
+.celda-carne-no { background-color: rgba(25, 135, 84, 0.03); }
+
+.plato-texto {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--fs-ink);
+  line-height: 1.3;
+}
+
+/* Chips / Badges */
+.chip {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+
+.chip-carne {
+  background-color: rgba(106, 47, 179, 0.12);
+  color: var(--fs-purple-dark);
+}
+
+.chip-veg {
+  background-color: rgba(25, 135, 84, 0.12);
+  color: #146c43;
+}
+
+/* Ventanas Modales */
+.pdf-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(74, 31, 128, 0.3);
+  backdrop-filter: blur(8px);
+  z-index: 1050;
+}
+
+.pdf-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--fs-white);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: var(--fs-shadow-lg);
+  z-index: 1060;
+  text-align: center;
+  overflow: hidden;
+  animation: modalEntrance 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pdf-modal__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--fs-yellow);
+}
+
+.pdf-modal__title {
+  color: var(--fs-purple-dark);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pdf-modal__text {
+  color: var(--fs-muted);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.pdf-modal__btn {
+  background: var(--fs-purple);
+  color: var(--fs-white);
+  border: none;
+  font-weight: 700;
+  padding: 0.6rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pdf-modal__btn:hover {
+  background: var(--fs-purple-dark);
+}
+
+@keyframes modalEntrance {
+  from { opacity: 0; transform: translate(-50%, -40%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Reglas de Impresión */
+@media print {
+  .pdf-modal-backdrop, .pdf-modal, .hero-panel, .btn-pdf-glow, .chip {
+    display: none !important;
+  }
+  .menu-page { padding: 0 !important; }
+  .menu-card { box-shadow: none !important; border: none !important; padding: 0 !important; }
+  body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

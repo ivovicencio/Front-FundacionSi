@@ -10,15 +10,14 @@ import { RouterModule } from '@angular/router';
   styleUrl: './home.css'
 })
 export class Home implements OnInit {
-  // Datos simulados que vendrán del AuthService via JWT[cite: 4]
   usuario = {
     nombre: 'Ivo Vicencio',
-    rol: 'RESIDENTE_STOCK' // ADMIN, RESIDENTE_STOCK, RESIDENTE[cite: 3]
+    rol: 'ADMIN'
   };
 
   fraseDelDia: string = "Mucha gente pequeña, en lugares pequeños, haciendo cosas pequeñas, puede cambiar el mundo.";
 
-  // Getters para control de UI limpio[cite: 15]
+
   get esAdmin(): boolean { return this.usuario.rol === 'ADMIN'; }
   get esStock(): boolean { return this.usuario.rol === 'RESIDENTE_STOCK'; }
   get esEstudiante(): boolean { return this.usuario.rol !== 'ADMIN'; }
@@ -27,6 +26,6 @@ export class Home implements OnInit {
   }
 
   ngOnInit(): void {
-    // Aquí podrías llamar a un servicio de frases o noticias
+    //ver despues de llamar a algun servicio de frases motivacionales o algo asi
   }
 }
