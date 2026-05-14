@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { StorageService } from '../../../services/storage';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +19,7 @@ interface ItemSemanal {
   styleUrls: ['./conteo-semanal.css'],
 })
 export class ConteoSemanal implements OnInit {
+  private storage = inject(StorageService);
   items: ItemSemanal[] = [
     { nombre: 'Tomate', categoria: 'VERDURA', unidad: 'KG', cantidadActual: 0, cantidadObjetivo: 0 },
     { nombre: 'Papa', categoria: 'VERDURA', unidad: 'KG', cantidadActual: 0, cantidadObjetivo: 0 },
@@ -35,11 +37,11 @@ export class ConteoSemanal implements OnInit {
 
   confirmarConteo(): void {
     console.log('Conteo semanal confirmado:', this.items);
-    localStorage.setItem('conteoSemanal', JSON.stringify(this.items));
+    this.storage.setItem('conteoSemanal', JSON.stringify(this.items));
   }
 
   ngOnInit(): void {
-    const saved = localStorage.getItem('conteoSemanal');
+    const saved = this.storage.getItem('conteoSemanal');
     if (saved) {
       try {
         const parsed = JSON.parse(saved) as ItemSemanal[];

@@ -9,5 +9,5 @@ import { Navbar } from './components/layouts/navbar/navbar';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('front-soysi');
+  protected readonly title = signal('SoySí - Residencia Estudiantil');
 }

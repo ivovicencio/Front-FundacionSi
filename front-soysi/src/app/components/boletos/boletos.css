@@ -1,0 +1,104 @@
+/* --- COMPONENTE SOLICITUD DE BOLETO (SOYSÍ) --- */
+
+section.panel {
+    background: var(--fs-white);
+    border-radius: 16px;
+    border: 1px solid var(--fs-border);
+    box-shadow: var(--fs-shadow);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.panel-header h3 {
+    color: var(--fs-purple-dark);
+    font-weight: 800;
+}
+
+/* Form Grid Responsivo */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.full { grid-column: 1 / -1; }
+
+.label-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--fs-purple-dark);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* Input Groups con Iconos */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group i {
+    position: absolute;
+    left: 12px;
+    color: var(--fs-purple);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1.5px solid var(--fs-border);
+    border-radius: 12px;
+    background: var(--fs-bg);
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+select { padding-left: 1rem; } /* Selects no necesitan icono interno */
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--fs-purple);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(106, 47, 179, 0.1);
+    outline: none;
+}
+
+/* Botón Estilo App */
+.btn-submit {
+    grid-column: 1 / -1;
+    background: var(--fs-purple);
+    color: white;
+    padding: 1rem;
+    border-radius: 14px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-submit:disabled { background: #ccc; cursor: not-allowed; }
+
+/* Banners de Estado */
+.error-banner, .success-banner {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-banner { background: #fff5f5; color: #c53030; border-left: 5px solid #c53030; }
+.success-banner { background: #f0fff4; color: #276749; border-left: 5px solid #276749; }
+
+/* Mobile logic */
+@media (max-width: 650px) {
+    .form-grid { grid-template-columns: 1fr; }
+}

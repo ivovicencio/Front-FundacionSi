@@ -1,1 +1,91 @@
-<p>panel-stock works!</p>
+<div class="panel-stock">
+  <h2>Panel de Stock</h2>
+
+  <!-- Sección de Accesos a Conteos[cite: 25] -->
+  <section class="conteos">
+    <div class="card">
+      <h3>Conteo Mensual</h3>
+      <p class="muted">Items en último registro: {{ conteoMensual.length }}</p>
+      <div class="form-row">
+        <label>Cantidad de personas</label>
+        <input type="number" [(ngModel)]="personasEnPeriodo" />
+      </div>
+      <div class="actions">
+        <button (click)="generarPedidoMensual()" class="btn btn-primary mb-2 w-100">Generar Pedido</button>
+        <a class="btn btn-outline w-100" routerLink="/stock/mensual">Ir a Conteo Mensual</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Conteo Semanal</h3>
+      <p class="muted">Última actualización: {{ conteoSemanal.length }} items</p>
+      <div class="actions">
+        <a class="btn btn-outline w-100" routerLink="/stock/semanal">Ir a Conteo Semanal</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Conteo Ocasa</h3>
+      <p class="muted">Entradas recientes: {{ conteoOcasa.length }} bultos</p>
+      <div class="actions">
+        <a class="btn btn-outline w-100" routerLink="/stock/ocasa">Ir a Conteo Ocasa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pedido Generado[cite: 25] -->
+  <section class="pedido-generado" *ngIf="pedidoGenerado.length">
+    <h3>Pedido Mensual Sugerido</h3>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad Sugerida</th>
+            <th>Ajuste Manual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pedidoGenerado">
+            <td><strong>{{ p.nombre }}</strong></td>
+            <td>{{ p.cantidad }}</td>
+            <td><input type="number" [(ngModel)]="p.cantidad" style="width: 80px; padding: 4px;"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top: 1rem;">
+      <button class="btn btn-secondary" (click)="confirmarPedido()">Confirmar y Enviar Pedido</button>
+    </div>
+  </section>
+
+  <!-- Editor de Reglas[cite: 25] -->
+  <section class="reglas" style="margin-top: 3rem;">
+    <h3>Reglas de Consumo (Editor)</h3>
+    <p class="muted">Define el consumo base por persona para generar pedidos automáticos.</p>
+    <div class="table-wrap">
+      <table class="table table-reglas">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Por persona (30d)</th>
+            <th>Unidad</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of reglasEditable; let i = index">
+            <td><input [(ngModel)]="r.key" placeholder="Ej: Arroz"></td>
+            <td><input type="number" [(ngModel)]="r.porPersona30dias"></td>
+            <td><input [(ngModel)]="r.unidad" placeholder="kg"></td>
+            <td><button class="btn btn-outline" (click)="eliminarRegla(i)">Eliminar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-row" style="flex-direction: row; margin-top: 1rem;">
+      <button class="btn btn-secondary" (click)="agregarRegla()">+ Agregar Regla</button>
+      <button class="btn btn-primary" (click)="guardarReglas()">Guardar Cambios</button>
+    </div>
+  </section>
+</div>

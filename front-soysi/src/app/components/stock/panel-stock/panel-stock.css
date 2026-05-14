@@ -1,0 +1,162 @@
+/* --- PANEL DE STOCK INTEGRADO (SOYSÍ) --- */
+
+.panel-stock {
+    padding: 24px;
+    background-color: var(--fs-bg);
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.panel-stock h2 {
+    color: var(--fs-purple-dark);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.panel-stock h2::before {
+    content: '';
+    width: 6px;
+    height: 30px;
+    background: var(--fs-yellow);
+    border-radius: 3px;
+}
+
+/* Grid de Conteos: Estilo Dashboard */
+.conteos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 2.5rem;
+}
+
+.card {
+    background: var(--fs-white);
+    border-radius: 16px;
+    border: 1px solid var(--fs-border);
+    padding: 1.5rem;
+    box-shadow: var(--fs-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--fs-shadow-lg);
+}
+
+.card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--fs-purple);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Formularios dentro de tarjetas */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.form-row label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--fs-muted);
+    text-transform: uppercase;
+}
+
+.form-row input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--fs-border);
+    font-family: inherit;
+    width: 100%;
+}
+
+/* Botones y Acciones */
+.btn {
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary {
+    background-color: var(--fs-yellow);
+    color: var(--fs-purple-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--fs-yellow-light);
+}
+
+.btn-primary {
+    background-color: var(--fs-purple);
+    color: var(--fs-white);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--fs-purple);
+    color: var(--fs-purple);
+}
+
+/* Tablas de Pedido y Reglas */
+.table-wrap {
+    background: var(--fs-white);
+    border-radius: 12px;
+    border: 1px solid var(--fs-border);
+    overflow: hidden;
+    margin-top: 1.5rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: var(--fs-purple-dark);
+    color: var(--fs-white);
+    padding: 12px;
+    text-align: left;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--fs-border);
+    vertical-align: middle;
+}
+
+.table-reglas input {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--fs-border);
+}
+
+.muted {
+    color: var(--fs-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .conteos { grid-template-columns: 1fr; }
+    .card { width: 100%; }
+}

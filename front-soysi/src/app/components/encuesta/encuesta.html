@@ -1,1 +1,67 @@
-<p>encuesta works!</p>
+<section class="panel shadow-sm">
+  <div class="panel-header">
+    <h3><i class="bi bi-card-checklist me-2"></i>Encuesta de Comidas</h3>
+    <p class="subtitle">Confirmá tu presencia para que no sobre comida en la resi.</p>
+  </div>
+
+  <form (ngSubmit)="enviarEncuesta()" #encuestaForm="ngForm">
+    <div class="controls-grid">
+      <label>
+        <span class="label-text">Nombre del Residente</span>
+        <div class="input-group">
+          <i class="bi bi-person"></i>
+          <input type="text" name="nombreResidente" [(ngModel)]="nombreResidente" required placeholder="Tu nombre">
+        </div>
+      </label>
+
+      <label>
+        <span class="label-text">Periodo a anotar</span>
+        <div class="input-group">
+          <i class="bi bi-calendar3"></i>
+          <select name="modo" [(ngModel)]="modo" (change)="actualizarDias()">
+            <option value="DIA">Solo hoy</option>
+            <option value="SEMANA">Semana completa</option>
+          </select>
+        </div>
+      </label>
+    </div>
+
+    <div class="table-wrap">
+      <table class="fs-table">
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th class="text-center">Almuerzo</th>
+            <th class="text-center">Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of diasVisibles">
+            <td class="fw-bold text-purple">{{ d.fecha }}</td>
+            <td class="text-center">
+              <input type="checkbox" class="fs-check" [(ngModel)]="d.almuerzo" [name]="'almuerzo-' + d.fecha">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" class="fs-check" [(ngModel)]="d.cena" [name]="'cena-' + d.fecha">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-encuesta">
+      <p class="resumen">
+        <i class="bi bi-info-circle-fill me-1"></i>
+        Total comidas: <span class="badge-total">{{ totalComidasSeleccionadas }}</span>
+      </p>
+      <button type="submit" [disabled]="encuestaForm.invalid || loading" class="btn-fs-primary">
+        <span *ngIf="!loading">Guardar Asistencia</span>
+        <span *ngIf="loading" class="spinner"></span>
+      </button>
+    </div>
+  </form>
+
+  <div class="success-banner" *ngIf="enviado">
+    <i class="bi bi-check-all me-2"></i> ¡Listo! Tu asistencia fue registrada.
+  </div>
+</section>

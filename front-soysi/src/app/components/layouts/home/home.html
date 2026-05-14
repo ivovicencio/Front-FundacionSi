@@ -1,78 +1,105 @@
 <div class="home-container">
+  <!-- Hero Section con Glassmorphism -->
   <header class="home-hero">
-    <div class="hero-content text-center">
-      <h1 class="display-4 fw-bold">Soy<span class="text-yellow">Sí</span></h1>
-      <p class="lead">Gestión interna · Residencia Estudiantil</p>
-      <div class="quote-box">
-        <p class="quote">"{{ fraseDelDia }}"</p>
+    <div class="hero-content">
+      <h1 class="hero-logo">Soy<span class="text-yellow">Sí</span></h1>
+      <p class="hero-subtitle">Gestión · Residencia Universitaria</p>
+      
+      <div class="welcome-box">
+        <span class="welcome-text">¡Hola, {{ usuario.nombre }}!</span>
+        <div class="quote-container">
+          <p class="quote">"{{ fraseDelDia }}"</p>
+        </div>
       </div>
     </div>
   </header>
 
-  <section class="quick-access mt-5">
-    <div class="row g-4 justify-content-center">
+  <!-- Panel de Accesos Rápidos -->
+  <section class="quick-access-panel">
+    <div class="access-grid">
       
-      <div class="col-md-6 col-lg-3">
+      <!-- Menú: Acceso Universal[cite: 15] -->
+      <div class="card-wrapper">
         <div class="access-card" [routerLink]="puedeGestionarOperaciones ? '/menu/editor' : '/menu/view'">
-          <div class="icon-wrap"><i class="bi bi-calendar-check"></i></div>
-          <h3>Menú</h3>
-          <p>{{ puedeGestionarOperaciones ? 'Armar y editar el menú semanal.' : 'Consulta qué se come hoy.' }}</p>
+          <div class="icon-wrap purple"><i class="bi bi-calendar-heart"></i></div>
+          <div class="card-text">
+            <h3>Menú</h3>
+            <p>{{ puedeGestionarOperaciones ? 'Administrar comidas semanales' : 'Consulta el menú del día' }}</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3" *ngIf="puedeGestionarOperaciones">
-        <div class="access-card" routerLink="/stock/semanal">
-          <div class="icon-wrap"><i class="bi bi-box-seam"></i></div>
-          <h3>Stock</h3>
-          <p>{{ usuario.rol === 'RESIDENTE_STOCK' ? 'Realizar conteos de mercadería.' : 'Visualizar estado de depósitos.' }}</p>
+      <!-- Stock: Admin y Stock[cite: 15] -->
+      <div class="card-wrapper" *ngIf="puedeGestionarOperaciones">
+        <div class="access-card" routerLink="/stock/panel">
+          <div class="icon-wrap purple"><i class="bi bi-boxes"></i></div>
+          <div class="card-text">
+            <h3>Inventario</h3>
+            <p>Conteos y control de depósitos</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3">
-        <div class="access-card" [routerLink]="esAdmin ? '/asistencia/panel' : '/asistencia/form'"> <!-- con el operador ternario se controla la navegación -->
-          <div class="icon-wrap"><i class="bi bi-person-badge"></i></div>
-          <h3>Asistencia</h3>
-          <p>{{ esAdmin ? 'Panel de control de residentes.' : 'Registra tus salidas y regresos.' }}</p>
+      <!-- Asistencia: Basado en Rol[cite: 15] -->
+      <div class="card-wrapper">
+        <div class="access-card" [routerLink]="esAdmin ? '/asistencia/panel' : '/asistencia/form'">
+          <div class="icon-wrap purple"><i class="bi bi-person-check"></i></div>
+          <div class="card-text">
+            <h3>Asistencias</h3>
+            <p>{{ esAdmin ? 'Panel de control residentes' : 'Registra tus salidas/regresos' }}</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3" *ngIf="esEstudiante">
+      <!-- Encuesta: Solo Residentes (Color Acento) -->
+      <div class="card-wrapper" *ngIf="esEstudiante">
         <div class="access-card accent" routerLink="/encuesta">
-          <div class="icon-wrap"><i class="bi bi-clipboard2-check"></i></div>
-          <h3>Encuesta</h3>
-          <p>¡No te olvides de anotarte para comer!</p>
+          <div class="icon-wrap dark"><i class="bi bi-clipboard-check"></i></div>
+          <div class="card-text">
+            <h3>Asistir a Comer</h3>
+            <p>Confirmá tu presencia hoy</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3" *ngIf="esEstudiante">
+      <!-- Boletos: Solo Residentes[cite: 15] -->
+      <div class="card-wrapper" *ngIf="esEstudiante">
         <div class="access-card" routerLink="/boletos/solicitud">
-          <div class="icon-wrap"><i class="bi bi-ticket-perforated"></i></div>
-          <h3>Boletos</h3>
-          <p>Solicitar colectivo o avion con anticipacion minima de 7 dias.</p>
+          <div class="icon-wrap purple"><i class="bi bi-ticket-perforated"></i></div>
+          <div class="card-text">
+            <h3>Boletos</h3>
+            <p>Pedidos con anticipación</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3" *ngIf="esAdmin">
+      <!-- Admin: Gestión de Usuarios[cite: 15] -->
+      <div class="card-wrapper" *ngIf="esAdmin">
         <div class="access-card special" routerLink="/register">
-          <div class="icon-wrap"><i class="bi bi-person-plus-fill"></i></div>
-          <h3>Usuarios</h3>
-          <p>Registrar nuevos usuarios al sistema.</p>
+          <div class="icon-wrap dashed"><i class="bi bi-person-plus"></i></div>
+          <div class="card-text">
+            <h3>Usuarios</h3>
+            <p>Alta y gestión de residentes</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3" *ngIf="esAdmin">
+      <!-- Admin: Gestión de Equipos[cite: 15] -->
+      <div class="card-wrapper" *ngIf="esAdmin">
         <div class="access-card team-card" routerLink="/stock/asignar-grupo">
-          <div class="icon-wrap"><i class="bi bi-people-fill"></i></div>
-          <h3>Equipos</h3>
-          <p>Designar a los 3 encargados de stock mensual.</p>
+          <div class="icon-wrap solid-purple"><i class="bi bi-people"></i></div>
+          <div class="card-text">
+            <h3>Equipos Stock</h3>
+            <p>Designar encargados mensuales</p>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <footer class="foundation-footer mt-5 text-center">
-    <hr class="fs-divider">
-    <p class="m-0 text-muted">Fundación Sí Argentina · Residencia Universitaria</p>
+  <footer class="home-footer">
+    <div class="fs-divider"></div>
+    <p>Fundación Sí Argentina · Residencia Universitaria</p>
   </footer>
 </div>

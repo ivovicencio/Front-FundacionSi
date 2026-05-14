@@ -1,0 +1,201 @@
+/* --- COMPONENTE GESTIÓN DE GRUPO (SOYSÍ) --- */
+
+.stock-assignment-card {
+    background: var(--fs-white);
+    border-radius: 20px;
+    border: 1px solid var(--fs-border);
+    overflow: hidden;
+    margin: 1rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Header Estilo App */
+.card-header-fs {
+    background: linear-gradient(135deg, var(--fs-purple), var(--fs-purple-dark));
+    padding: 1.25rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    color: var(--fs-white);
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Badges Profesionales */
+.badge-fs {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.badge-yellow {
+    background-color: var(--fs-yellow);
+    color: var(--fs-purple-dark);
+}
+
+.badge-active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--fs-white);
+    border: 1px solid var(--fs-white);
+}
+
+/* Cuerpo y Listado Mobile-First */
+.card-body-fs {
+    padding: 1.5rem;
+}
+
+.section-label {
+    color: var(--fs-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.resident-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.resident-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: var(--fs-bg);
+    border: 1px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.resident-item:hover {
+    background: white;
+    border-color: var(--fs-purple-light);
+}
+
+.resident-item.selected {
+    background: white;
+    border-color: var(--fs-purple);
+    box-shadow: 0 4px 12px rgba(106, 47, 179, 0.08);
+}
+
+/* Custom Checkbox UX */
+.check-wrapper {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.custom-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--fs-border);
+    cursor: pointer;
+    accent-color: var(--fs-purple);
+}
+
+.resident-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.resident-name {
+    font-weight: 700;
+    color: var(--fs-purple-dark);
+    font-size: 0.95rem;
+}
+
+.resident-tag {
+    font-size: 0.7rem;
+    color: var(--fs-muted);
+    font-weight: 600;
+}
+
+.selected-icon {
+    color: var(--fs-purple);
+    font-size: 1.2rem;
+}
+
+/* Botones con Feedback Visual */
+.btn-fs {
+    padding: 1rem;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-fs-primary {
+    background: var(--fs-purple);
+    color: white;
+}
+
+.btn-fs-primary:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.btn-fs-primary:not(:disabled):active {
+    transform: scale(0.98);
+}
+
+/* Estado Activo - Alerta elegante */
+.info-alert {
+    background: rgba(106, 47, 179, 0.05);
+    padding: 1.25rem;
+    border-radius: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(106, 47, 179, 0.1);
+}
+
+.info-alert i {
+    color: var(--fs-purple);
+    font-size: 1.2rem;
+}
+
+.info-alert p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--fs-purple-dark);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.btn-fs-danger-outline {
+    background: transparent;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+.btn-fs-danger-outline:hover {
+    background: #dc3545;
+    color: white;
+}

@@ -1,0 +1,75 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #4a1f80 0%, #6a2fb3 100%);
+    padding: 1.5rem;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    color: white;
+}
+
+.brand-logo-wrap {
+    width: 60px;
+    height: 60px;
+    background: #ffd800;
+    color: #6a2fb3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 16px;
+    font-size: 2rem;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(255, 216, 0, 0.3);
+}
+
+.text-yellow { color: #ffd800; }
+
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffd800;
+    box-shadow: 0 0 10px rgba(255, 216, 0, 0.2);
+    color: white;
+}
+
+.input-group-text {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 12px 0 0 12px;
+}
+
+.btn-login {
+    background: #ffd800;
+    color: #6a2fb3;
+    border: none;
+    padding: 0.8rem;
+    font-weight: 800;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background: #e6c200;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 216, 0, 0.4);
+}

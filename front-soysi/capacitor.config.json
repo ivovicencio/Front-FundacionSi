@@ -1,0 +1,6 @@
+{
+  "appId": "com.fundacionsi.frontsoysi",
+  "appName": "front-soysi",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

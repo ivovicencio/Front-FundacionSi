@@ -1,4 +1,5 @@
 import { Component, OnInit, inject, NgZone } from '@angular/core';
+import { StorageService } from '../../../services/storage';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -13,6 +14,7 @@ import { PlatoDia, SemanaMenu } from '../../../services/menu';
 export class MenuView implements OnInit {
   private ngZone = inject(NgZone);
   private readonly storageKey = 'hoysecome_manual_final_v2';
+  private storage = inject(StorageService);
 
   menuData!: SemanaMenu;
   rangoEditable = 'Lunes 30/03/2026 al Domingo 05/04/2026';
@@ -92,7 +94,7 @@ export class MenuView implements OnInit {
   }
 
   private cargarEstado(): boolean {
-    const raw = localStorage.getItem(this.storageKey);
+    const raw = this.storage.getItem(this.storageKey);
     if (!raw) return false;
     try {
       const data = JSON.parse(raw) as {

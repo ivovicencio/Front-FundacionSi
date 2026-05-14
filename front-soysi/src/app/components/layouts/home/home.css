@@ -1,74 +1,151 @@
+/* --- HOME CONTAINER (SOYSÍ PRO) --- */
 .home-container {
   padding-bottom: 3rem;
+  background-color: var(--fs-bg);
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
+/* Hero Section: Mejorado con gradiente profundo */
 .home-hero {
-  background: linear-gradient(rgba(106, 47, 179, 0.9), rgba(74, 31, 128, 0.95)), 
-              url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80');
-  background-size: cover;
-  background-position: center;
-  padding: 4rem 2rem;
-  border-radius: 20px;
+  background: linear-gradient(135deg, var(--fs-purple-dark), var(--fs-purple));
+  padding: 4rem 1.5rem;
   color: white;
   text-align: center;
+  border-radius: 0 0 40px 40px;
   box-shadow: 0 10px 30px rgba(106, 47, 179, 0.2);
 }
 
-.text-yellow { color: #ffd800; }
+.hero-logo {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -2px;
+}
 
+.hero-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.welcome-box {
+  margin-top: 2rem;
+}
+
+.welcome-text {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--fs-yellow);
+}
+
+.quote-container {
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Grid de Accesos: Mobile First[cite: 14] */
+.quick-access-panel {
+  padding: 0 1.5rem;
+  margin-top: -30px; /* Superposición sutil */
+}
+
+.access-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Tarjetas Profesionales[cite: 14] */
 .access-card {
-  background: white;
-  padding: 2rem 1.5rem;
-  border-radius: 18px;
-  text-align: center;
-  border: 1px solid rgba(106, 47, 179, 0.1);
+  background: var(--fs-white);
+  padding: 1.5rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  border: 1px solid var(--fs-border);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .access-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 35px rgba(106, 47, 179, 0.15);
-  border-color: #6a2fb3;
+  transform: translateY(-8px);
+  box-shadow: var(--fs-shadow-lg);
+  border-color: var(--fs-purple);
 }
 
+.card-text h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--fs-purple-dark);
+  font-weight: 800;
+}
+
+.card-text p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--fs-muted);
+  line-height: 1.3;
+}
+
+/* Icon Wrappers[cite: 14] */
 .icon-wrap {
-  width: 60px;
-  height: 60px;
-  background: rgba(106, 47, 179, 0.1);
-  color: #6a2fb3;
-  font-size: 1.8rem;
+  min-width: 55px;
+  height: 55px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
-  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
 }
 
-.access-card h3 {
-  font-weight: 800;
-  color: #4a1f80;
-  font-size: 1.25rem;
+.icon-wrap.purple { background: rgba(106, 47, 179, 0.1); color: var(--fs-purple); }
+.icon-wrap.dark { background: rgba(0, 0, 0, 0.1); color: var(--fs-purple-dark); }
+.icon-wrap.dashed { border: 2px dashed var(--fs-purple); color: var(--fs-purple); }
+.icon-wrap.solid-purple { background: var(--fs-purple); color: white; }
+
+/* Variantes de Tarjeta[cite: 14] */
+.access-card.accent { 
+  background: var(--fs-yellow); 
+  border: none;
 }
+.access-card.accent .card-text h3, 
+.access-card.accent .card-text p { color: var(--fs-purple-dark); }
 
-/* Tarjeta Amarilla (Encuesta) */
-.access-card.accent { background: #ffd800; border: none; }
-.access-card.accent .icon-wrap { background: rgba(106, 47, 179, 0.15); }
+.access-card.special { background: #fdfdff; }
 
-/* Tarjeta Admin Especial (Usuarios) */
-.access-card.special { border: 2px dashed #6a2fb3; background: #f8f9fa; }
-
-/* Tarjeta Nueva (Equipos/Asignar) */
-.access-card.team-card { border: 2px solid #6a2fb3; }
-.access-card.team-card .icon-wrap { background: #6a2fb3; color: white; }
+/* Footer[cite: 14] */
+.home-footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 0 1.5rem;
+}
 
 .fs-divider {
-  border-top: 2px solid #6a2fb3;
-  width: 50px;
-  margin: 2rem auto;
-  opacity: 0.3;
+  width: 60px;
+  height: 4px;
+  background: var(--fs-yellow);
+  margin: 0 auto 1.5rem;
+  border-radius: 10px;
+}
+
+.home-footer p {
+  color: var(--fs-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Mobile Ajustes[cite: 14] */
+@media (max-width: 600px) {
+  .hero-logo { font-size: 2.5rem; }
+  .access-grid { grid-template-columns: 1fr; }
+  .access-card { padding: 1.25rem; }
 }

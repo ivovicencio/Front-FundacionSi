@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { StorageService } from '../../../services/storage';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -29,6 +30,8 @@ interface ItemMensual {
 })
 
 export class ConteoMensual implements OnInit {
+
+  private storage = inject(StorageService);
 
   items: ItemMensual[] = [
     {
@@ -61,7 +64,7 @@ export class ConteoMensual implements OnInit {
   ];
 
   ngOnInit(): void {
-    const saved = localStorage.getItem('conteoMensual');
+    const saved = this.storage.getItem('conteoMensual');
     if (saved) {
       try {
         const parsed = JSON.parse(saved) as ItemMensual[];
@@ -145,8 +148,8 @@ export class ConteoMensual implements OnInit {
 
  //pendiente en el backend
  guardarConteo(): void{
-   console.log('Conteo mensual guardado:', this.items);
-   localStorage.setItem('conteoMensual', JSON.stringify(this.items));
+  console.log('Conteo mensual guardado:', this.items);
+  this.storage.setItem('conteoMensual', JSON.stringify(this.items));
  }
 
 

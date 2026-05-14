@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { StorageService } from '../../../services/storage';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -28,6 +29,7 @@ interface ResidenteBox {
   styleUrls: ['./conteo-ocasa.css'],
 })
 export class ConteoOcasa implements OnInit {
+  private storage = inject(StorageService);
   fechaRecepcion: string = '';
   itemsRecibidos: ItemOcasa[] = [
     { codigo: 'GI-3715', nombre: 'Olla Avon', peso: 1, unidad: 'UNIDAD', paquetes: 2, fardos: 1, total: 2, vencimiento: '' },
@@ -38,7 +40,7 @@ export class ConteoOcasa implements OnInit {
   ];
 
   ngOnInit(): void {
-    const saved = localStorage.getItem('conteoOcasa');
+    const saved = this.storage.getItem('conteoOcasa');
     if (saved) {
       try {
         const parsed = JSON.parse(saved) as { fechaRecepcion: string; itemsRecibidos: ItemOcasa[]; cajasResidentes: ResidenteBox[] };
@@ -120,7 +122,7 @@ export class ConteoOcasa implements OnInit {
   // Guarda la recepción (fecha, items y cajas residentes) en localStorage y escribe en consola.
   confirmarRecepcion(): void {
     const payload = { fechaRecepcion: this.fechaRecepcion, itemsRecibidos: this.itemsRecibidos, cajasResidentes: this.cajasResidentes };
-    localStorage.setItem('conteoOcasa', JSON.stringify(payload));
+    this.storage.setItem('conteoOcasa', JSON.stringify(payload));
     console.log('Recepción OCASA guardada:', payload);
   }
 }

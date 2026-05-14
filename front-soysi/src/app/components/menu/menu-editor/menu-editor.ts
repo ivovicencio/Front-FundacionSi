@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { PlatoDia, SemanaMenu } from '../../../services/menu';
+import { StorageService } from '../../../services/storage';
 
 @Component({
   selector: 'app-menu-editor',
@@ -16,6 +17,7 @@ export class MenuEditor implements OnInit {
   private ngZone = inject(NgZone);
   private router = inject(Router);
   private readonly storageKey = 'hoysecome_manual_final_v2';
+  private storage = inject(StorageService);
 
   menuData!: SemanaMenu;
   rangoEditable = 'Lunes 30/03/2026 al Domingo 05/04/2026';
@@ -222,7 +224,7 @@ export class MenuEditor implements OnInit {
   }
 
   private guardarEstado(): void {
-    localStorage.setItem(
+    this.storage.setItem(
       this.storageKey,
       JSON.stringify({
         rangoEditable: this.rangoEditable,
@@ -233,7 +235,7 @@ export class MenuEditor implements OnInit {
   }
 
   private cargarEstado(): boolean {
-    const raw = localStorage.getItem(this.storageKey);
+    const raw = this.storage.getItem(this.storageKey);
     if (!raw) return false;
     try {
       const data = JSON.parse(raw) as {

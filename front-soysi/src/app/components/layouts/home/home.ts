@@ -1,31 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
+  // Datos simulados que vendrán del AuthService via JWT[cite: 4]
   usuario = {
     nombre: 'Ivo Vicencio',
-    rol: 'ADMIN',
-    esStockActivo: true
+    rol: 'RESIDENTE_STOCK' // ADMIN, RESIDENTE_STOCK, RESIDENTE[cite: 3]
   };
 
-  fraseDelDia = 'La vida es como una bicicleta, para mantener el equilibrio debes seguir adelante. - Albert Einstein';
+  fraseDelDia: string = "Mucha gente pequeña, en lugares pequeños, haciendo cosas pequeñas, puede cambiar el mundo.";
 
-  //GETTERS PARA CONTROLAR LA VISIBILIDAD DE TARJETAS Y FUNCIONALIDADES
-  get puedeGestionarOperaciones(){
-    return this.usuario.rol === 'ADMIN' || this.usuario.rol === 'RESIDENTE_STOCK';
+  // Getters para control de UI limpio[cite: 15]
+  get esAdmin(): boolean { return this.usuario.rol === 'ADMIN'; }
+  get esStock(): boolean { return this.usuario.rol === 'RESIDENTE_STOCK'; }
+  get esEstudiante(): boolean { return this.usuario.rol !== 'ADMIN'; }
+  get puedeGestionarOperaciones(): boolean { 
+    return this.esAdmin || this.esStock; 
   }
 
-  get esAdmin(){
-    return this.usuario.rol === 'ADMIN';
-  }
-
-  get esEstudiante(){
-    return this.usuario.rol === 'RESIDENTE_NORMAL' || this.usuario.rol === 'RESIDENTE_STOCK';
+  ngOnInit(): void {
+    // Aquí podrías llamar a un servicio de frases o noticias
   }
 }

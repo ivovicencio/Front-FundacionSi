@@ -1,70 +1,115 @@
+/* --- NAVBAR COMPONENTE (SOYSÍ PRO) --- */
+
 .main-nav {
-    background: linear-gradient(135deg, #6a2fb3 0%, #4a1f80 100%);
-    padding: 0.8rem 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-bottom: 3px solid #ffd800;
+    background: linear-gradient(90deg, var(--fs-purple-dark) 0%, var(--fs-purple) 100%);
+    padding: 0.6rem 0;
+    border-bottom: 3px solid var(--fs-yellow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.brand-badge {
-    background: #ffd800;
-    color: #6a2fb3;
-    width: 35px;
-    height: 35px;
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* Marca Estilizada */
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.brand-link:active { transform: scale(0.95); }
+
+.brand-icon {
+    background: var(--fs-yellow);
+    color: var(--fs-purple-dark);
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: 900;
-    font-size: 1.3rem;
-    box-shadow: 0 0 10px rgba(255, 216, 0, 0.3);
+    font-size: 1.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.brand-name {
+.brand-text {
     font-weight: 800;
-    font-size: 1.5rem;
-    letter-spacing: -1px;
-    color: white;
+    font-size: 1.6rem;
+    color: var(--fs-white);
+    margin: 0;
+    letter-spacing: -1.5px;
 }
 
-.text-yellow { color: #ffd800; }
+.text-yellow { color: var(--fs-yellow); }
 
-/* Avatar con decorado distintivo para Stock */
-.user-profile {
-    width: 42px;
-    height: 42px;
-    background: white;
+/* Avatar / Perfil UX */
+.profile-container {
+    cursor: pointer;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--fs-white);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #ffd800;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.stock-glow {
-    box-shadow: 0 0 15px #ffd800, inset 0 0 5px #ffd800;
-    animation: pulse-border 2s infinite;
-}
-
-@keyframes pulse-border {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.user-initials {
-    color: #6a2fb3;
+.initials {
+    color: var(--fs-purple-dark);
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
-@media (max-width: 991px) {
-    .user-profile {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        padding: 0;
-        justify-content: center;
-    }
+/* Efecto Stock: Glow y Badge */
+.avatar.stock-mode {
+    border-color: var(--fs-yellow);
+    box-shadow: 0 0 15px rgba(255, 216, 0, 0.4);
+    animation: avatar-pulse 2s infinite;
+}
+
+.role-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: var(--fs-yellow);
+    color: var(--fs-purple-dark);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--fs-purple);
+}
+
+@keyframes avatar-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 216, 0, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 216, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 216, 0, 0); }
+}
+
+/* Mobile responsive[cite: 16] */
+@media (max-width: 600px) {
+    .main-nav { padding: 0.5rem 0; }
+    .brand-text { font-size: 1.4rem; }
+    .brand-icon { width: 34px; height: 34px; font-size: 1.2rem; }
+    .avatar { width: 40px; height: 40px; }
 }

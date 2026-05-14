@@ -1,1 +1,77 @@
-<p>boletos works!</p>
+<section class="panel shadow-sm">
+  <div class="panel-header">
+    <h3><i class="bi bi-ticket-perforated me-2"></i>Solicitud de Boleto</h3>
+    <p class="subtitle">
+      Recordá que el viaje debe solicitarse con un mínimo de <strong>7 días de anticipación</strong>.
+    </p>
+  </div>
+
+  <form (ngSubmit)="enviarSolicitud()" #boletoForm="ngForm" class="form-grid">
+    <label class="full">
+      <span class="label-text">Nombre del Residente</span>
+      <div class="input-group">
+        <i class="bi bi-person"></i>
+        <input type="text" name="residenteNombre" [(ngModel)]="solicitud.residenteNombre" required placeholder="Nombre completo">
+      </div>
+    </label>
+
+    <label>
+      <span class="label-text">Tu Rol</span>
+      <select name="rol" [(ngModel)]="solicitud.rol" required>
+        <option value="RESIDENTE">Residente</option>
+        <option value="RESIDENTE_STOCK">Residente Stock</option>
+      </select>
+    </label>
+
+    <label>
+      <span class="label-text">Medio de Transporte</span>
+      <select name="tipoBoleto" [(ngModel)]="solicitud.tipoBoleto" required>
+        <option value="COLECTIVO">Colectivo 🚌</option>
+        <option value="AVION">Avión ✈️</option>
+      </select>
+    </label>
+
+    <label>
+      <span class="label-text">Origen</span>
+      <div class="input-group">
+        <i class="bi bi-geo-alt"></i>
+        <input type="text" name="ciudadOrigen" [(ngModel)]="solicitud.ciudadOrigen" required placeholder="Ej: Jujuy">
+      </div>
+    </label>
+
+    <label>
+      <span class="label-text">Destino</span>
+      <div class="input-group">
+        <i class="bi bi-geo-fill"></i>
+        <input type="text" name="ciudadDestino" [(ngModel)]="solicitud.ciudadDestino" required placeholder="Ej: Neuquén">
+      </div>
+    </label>
+
+    <label class="full">
+      <span class="label-text">Fecha del Viaje</span>
+      <div class="input-group">
+        <i class="bi bi-calendar-event"></i>
+        <input type="date" name="fechaViaje" [(ngModel)]="solicitud.fechaViaje" [min]="fechaMinima" required>
+      </div>
+      <small class="text-purple">Mínimo permitido: {{ fechaMinima | date:'dd/MM/yyyy' }}</small>
+    </label>
+
+    <label class="full">
+      <span class="label-text">Motivo del viaje <small>(Opcional)</small></span>
+      <textarea name="motivo" rows="3" [(ngModel)]="solicitud.motivo" placeholder="Detalles adicionales para la voluntaria..."></textarea>
+    </label>
+
+    <button type="submit" [disabled]="boletoForm.invalid || loading" class="btn-submit">
+      <span *ngIf="!loading">Enviar Solicitud</span>
+      <div *ngIf="loading" class="spinner"></div>
+    </button>
+  </form>
+
+  <div class="error-banner" *ngIf="errorFecha">
+    <i class="bi bi-exclamation-circle-fill"></i> {{ errorFecha }}
+  </div>
+  
+  <div class="success-banner" *ngIf="enviado">
+    <i class="bi bi-check-circle-fill"></i> Solicitud registrada. ¡Avisaremos al panel de administración!
+  </div>
+</section>

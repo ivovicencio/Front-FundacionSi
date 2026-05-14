@@ -1,0 +1,72 @@
+.register-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4a1f80 0%, #6a2fb3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.register-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 500px;
+    padding: 3rem;
+    color: white;
+}
+
+.admin-badge {
+    width: 70px;
+    height: 70px;
+    background: #ffd800;
+    color: #6a2fb3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    font-size: 2rem;
+    box-shadow: 0 0 25px rgba(255, 216, 0, 0.3);
+}
+
+.form-control, .form-select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 12px;
+    padding: 0.75rem;
+}
+
+.form-control:focus, .form-select:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffd800;
+    color: white;
+    box-shadow: none;
+}
+
+.form-select option {
+    background: #4a1f80;
+    color: white;
+}
+
+.btn-register {
+    background: #ffd800;
+    color: #6a2fb3;
+    font-weight: 800;
+    padding: 1rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.6) !important;
+}

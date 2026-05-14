@@ -1,1 +1,49 @@
-<p>asistencia-form works!</p>
+<section class="panel shadow-sm">
+  <div class="panel-header">
+    <h3><i class="bi bi-calendar-check me-2"></i>Asistencia</h3>
+    <p class="subtitle">Registrá tus salidas cuando no vayas a dormir en la residencia.</p>
+  </div>
+
+  <form (ngSubmit)="registrarAsistencia()" #asistenciaForm="ngForm" class="form-grid">
+    <!-- Campo Nombre: En el futuro esto será automático por JWT -->
+    <label class="full">
+      <span class="label-text">Nombre del Residente</span>
+      <div class="input-group">
+        <i class="bi bi-person"></i>
+        <input type="text" name="residenteNombre" [(ngModel)]="asistencia.residenteNombre" required placeholder="Tu nombre completo">
+      </div>
+    </label>
+
+    <label>
+      <span class="label-text">Fecha/Hora Salida</span>
+      <div class="input-group">
+        <i class="bi bi-box-arrow-right"></i>
+        <input type="datetime-local" name="fechaSalida" [(ngModel)]="asistencia.fechaSalida" required>
+      </div>
+    </label>
+
+    <label>
+      <span class="label-text">Regreso Estimado</span>
+      <div class="input-group">
+        <i class="bi bi-box-arrow-in-left"></i>
+        <input type="datetime-local" name="fechaRegresoEstimada" [(ngModel)]="asistencia.fechaRegresoEstimada" required>
+      </div>
+    </label>
+
+    <label class="full">
+      <span class="label-text">Motivo o Destino <small>(Opcional)</small></span>
+      <textarea name="motivo" rows="3" [(ngModel)]="asistencia.motivo" placeholder="Ej: Viaje a Neuquén por el fin de semana..."></textarea>
+    </label>
+
+    <button type="submit" [disabled]="asistenciaForm.invalid || loading" class="btn-submit">
+      <span *ngIf="!loading">Guardar Asistencia</span>
+      <span *ngIf="loading" class="spinner"></span>
+    </button>
+  </form>
+
+  <!-- Mensajes de feedback con mejor UX -->
+  <div *ngIf="statusMessage.text" [ngClass]="statusMessage.type" class="feedback-banner">
+    <i class="bi" [ngClass]="statusMessage.type === 'error' ? 'bi-exclamation-triangle' : 'bi-check-circle'"></i>
+    {{ statusMessage.text }}
+  </div>
+</section>

@@ -1,0 +1,112 @@
+/* --- COMPONENTE PANEL DE ASISTENCIAS (ADMIN) --- */
+
+section.panel {
+  background: var(--fs-white);
+  border-radius: 16px;
+  border: 1px solid var(--fs-border);
+  box-shadow: var(--fs-shadow);
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Filtros Estilo App */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box, .date-box {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-box i, .date-box i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fs-purple);
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1.5px solid var(--fs-border);
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--fs-purple);
+  box-shadow: 0 0 0 3px rgba(106, 47, 179, 0.1);
+}
+
+/* Tabla Pro / Mobile-Responsive */
+.table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--fs-border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--fs-white);
+}
+
+thead th {
+  background: var(--fs-purple-dark);
+  color: var(--fs-white);
+  padding: 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--fs-border);
+  font-size: 0.9rem;
+}
+
+.residente-name {
+  font-weight: 700;
+  color: var(--fs-purple-dark);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--fs-muted);
+  padding: 2rem;
+}
+
+/* RESPONSIVE: De Tabla a Tarjetas */
+@media (max-width: 768px) {
+  thead { display: none; } /* Ocultar cabecera en móvil */
+  
+  tr.asistencia-row {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 12px;
+    padding: 0.5rem;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--fs-purple);
+  }
+}

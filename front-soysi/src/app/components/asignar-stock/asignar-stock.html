@@ -1,1 +1,62 @@
-<p>asignar-stock works!</p>
+<!-- Mantenemos tu estructura lógica pero mejoramos las clases para UX móvil -->
+<div class="stock-assignment-card shadow-sm">
+  <div class="card-header-fs">
+    <div class="header-content">
+      <h3 class="header-title">
+        <i class="bi bi-people-fill"></i> 
+        Gestión de Grupo Stock
+      </h3>
+      <!-- Badges con mejor contraste -->
+      <span class="badge-fs badge-yellow" *ngIf="!grupoActualActivo">
+        {{ grupoSeleccionado.length }} / 3
+      </span>
+      <span class="badge-fs badge-active" *ngIf="grupoActualActivo">
+        ACTIVO
+      </span>
+    </div>
+  </div>
+  
+  <div class="card-body-fs">
+    <!-- Estado: Selección de Grupo -->
+    <div *ngIf="!grupoActualActivo" class="selection-container">
+      <p class="section-label">Seleccioná los 3 residentes para el turno</p>
+      
+      <div class="resident-list">
+        <label *ngFor="let resi of residentesDisponibles" 
+               class="resident-item" 
+               [class.selected]="grupoSeleccionado.includes(resi)">
+          <div class="check-wrapper">
+            <input class="custom-check" type="checkbox" 
+                   [checked]="grupoSeleccionado.includes(resi)"
+                   (change)="toggleSeleccion(resi)">
+          </div>
+          <div class="resident-info">
+            <span class="resident-name">{{ resi.nombre }}</span>
+            <span class="resident-tag">Residente</span>
+          </div>
+          <i class="bi bi-check-circle-fill selected-icon" *ngIf="grupoSeleccionado.includes(resi)"></i>
+        </label>
+      </div>
+
+      <div class="action-footer">
+        <button class="btn-fs btn-fs-primary w-100" 
+                [disabled]="grupoSeleccionado.length !== 3"
+                (click)="confirmarGrupo()">
+          CONFIRMAR Y NOTIFICAR GRUPO
+        </button>
+      </div>
+    </div>
+
+    <!-- Estado: Grupo Activo -->
+    <div *ngIf="grupoActualActivo" class="active-group-status">
+      <div class="info-alert">
+        <i class="bi bi-info-circle-fill"></i>
+        <p>Ya existe un equipo de stock cumpliendo su turno mensual.</p>
+      </div>
+      
+      <button class="btn-fs btn-fs-danger-outline w-100" (click)="eliminarGrupoActual()">
+        <i class="bi bi-person-x-fill"></i> FINALIZAR TURNO MENSUAL
+      </button>
+    </div>
+  </div>
+</div>

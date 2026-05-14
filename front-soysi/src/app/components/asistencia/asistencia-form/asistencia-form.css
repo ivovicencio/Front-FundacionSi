@@ -1,0 +1,137 @@
+/* --- COMPONENTE FORMULARIO DE ASISTENCIA (SOYSÍ) --- */
+
+section.panel {
+    background: var(--fs-white);
+    border-radius: 16px;
+    border: 1px solid var(--fs-border);
+    box-shadow: var(--fs-shadow);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+    margin: 0;
+    color: var(--fs-purple-dark);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    margin: 0.25rem 0 1.5rem 0;
+    color: var(--fs-muted);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Formulario en Grid para Responsive */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas en PC */
+    gap: 1.25rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--fs-purple-dark);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs Estilo App */
+input,
+textarea {
+    border: 1.5px solid var(--fs-border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: var(--fs-ink);
+    background-color: var(--fs-bg);
+    transition: all 0.2s ease;
+}
+
+input:focus, 
+textarea:focus {
+    outline: none;
+    border-color: var(--fs-purple);
+    background-color: var(--fs-white);
+    box-shadow: 0 0 0 4px rgba(106, 47, 179, 0.1);
+}
+
+/* Ocupar todo el ancho en campos largos */
+.full {
+    grid-column: 1 / -1;
+}
+
+/* Botón de Acción Principal */
+button[type="submit"] {
+    grid-column: 1 / -1; /* Botón ancho completo para móvil */
+    background: var(--fs-purple);
+    color: var(--fs-white);
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+    background: var(--fs-purple-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--fs-shadow-lg);
+}
+
+button[type="submit"]:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Mensajes de Feedback */
+.error {
+    background-color: rgba(180, 35, 24, 0.05);
+    color: #b42318;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #b42318;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 1.25rem;
+}
+
+.success {
+    background-color: rgba(2, 122, 72, 0.05);
+    color: #027a48;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #027a48;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 1.25rem;
+}
+
+/* Ajustes para Móvil */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+    }
+    
+    section.panel {
+        padding: 1.25rem;
+        margin: 1rem;
+    }
+}

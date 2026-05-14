@@ -1,1 +1,43 @@
-<p>asistencia-panel works!</p>
+<section class="panel shadow-sm">
+  <div class="panel-header">
+    <h3><i class="bi bi-person-badge me-2"></i>Panel de Asistencias</h3>
+    <p class="subtitle">Control de ingresos y egresos de residentes.</p>
+  </div>
+
+  <div class="filters">
+    <div class="search-box">
+      <i class="bi bi-search"></i>
+      <input type="text" [(ngModel)]="filtroNombre" placeholder="Buscar residente...">
+    </div>
+    <div class="date-box">
+      <i class="bi bi-calendar-event"></i>
+      <input type="date" [(ngModel)]="filtroFecha">
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="fs-table">
+      <thead>
+        <tr>
+          <th>Residente</th>
+          <th>Salida</th>
+          <th>Regreso Estimado</th>
+          <th>Motivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of registrosFiltrados" class="asistencia-row">
+          <td data-label="Residente" class="residente-name">{{ r.residenteNombre }}</td>
+          <td data-label="Salida">{{ r.fechaSalida | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td data-label="Regreso">{{ r.fechaRegresoEstimada | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td data-label="Motivo" class="motivo-cell">{{ r.motivo || 'Sin especificar' }}</td>
+        </tr>
+        <tr *ngIf="registrosFiltrados.length === 0" class="empty-state">
+          <td colspan="4">
+            <i class="bi bi-info-circle"></i> No se encontraron registros.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
