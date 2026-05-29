@@ -1,0 +1,51 @@
+<div class="asistencia-panel-page py-4 px-3 px-lg-5">
+  <div class="hero-panel mb-4">
+    <h1 class="hero-title">Panel de asistencias</h1>
+    <p class="hero-note">Control de ingresos y egresos de residentes.</p>
+  </div>
+
+  <div class="panel-card">
+    <div class="filters">
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" [(ngModel)]="filtroUsuario" (input)="cargarRegistros()" placeholder="Buscar residente..." />
+      </div>
+      <div class="date-box">
+        <i class="bi bi-calendar-event"></i>
+        <input type="date" [(ngModel)]="filtroFecha" (change)="cargarRegistros()" />
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="table-container" *ngIf="!loading">
+      <table class="fs-table">
+        <thead>
+          <tr>
+            <th>Residente</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of registrosFiltrados" class="asistencia-row">
+            <td data-label="Residente" class="residente-name">{{ r.usuarioNombre || '—' }}</td>
+            <td data-label="Fecha">{{ r.fecha | date:'dd/MM/yyyy' }}</td>
+            <td data-label="Estado">
+              <span class="status-badge" [class.presente]="r.presente" [class.ausente]="!r.presente">
+                {{ r.presente ? 'Presente' : 'Ausente' }}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="registrosFiltrados.length === 0">
+            <td colspan="3" class="empty-state">
+              <i class="bi bi-info-circle"></i> No se encontraron registros.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="usuarios-page py-4 px-3 px-lg-5">
+  <div class="hero-panel mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <div>
+      <h1 class="hero-title">Usuarios</h1>
+      <p class="hero-note">Gestión de residentes y administradores del sistema.</p>
+    </div>
+    <button class="btn-add" (click)="abrirModal()">
+      <i class="bi bi-person-plus"></i> Nuevo usuario
+    </button>
+  </div>
+
+  <div class="panel-card">
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="table-container" *ngIf="!loading">
+      <table class="fs-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>DNI</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of usuarios" class="user-row">
+            <td data-label="Nombre" class="nombre-cell">{{ u.nombre }}</td>
+            <td data-label="Email">{{ u.email }}</td>
+            <td data-label="DNI">{{ u.dni }}</td>
+            <td data-label="Rol">
+              <span class="role-badge" [ngClass]="{
+                'role-admin': u.rol === 'ADMIN',
+                'role-stock': u.rol === 'RESIDENTE_STOCK',
+                'role-residente': u.rol === 'RESIDENTE'
+              }">{{ getRolLabel(u.rol) }}</span>
+            </td>
+            <td data-label="Estado">
+              <span class="status-dot" [class.activo]="u.activo" [class.inactivo]="!u.activo"></span>
+              {{ u.activo ? 'Activo' : 'Inactivo' }}
+            </td>
+            <td data-label="Acciones" class="text-end acciones-cell">
+              <button class="btn-icon" (click)="abrirModal(u)" title="Editar">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn-icon btn-icon-danger" (click)="eliminar(u)" title="Dar de baja">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="usuarios.length === 0">
+            <td colspan="6" class="empty-state">No hay usuarios registrados.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="cerrarModal()"></div>
+<div class="modal-card" *ngIf="showModal">
+  <div class="modal-header">
+    <h3>{{ editMode ? 'Editar usuario' : 'Nuevo usuario' }}</h3>
+    <button class="modal-close" (click)="cerrarModal()">&times;</button>
+  </div>
+  <form (ngSubmit)="guardar()" class="modal-body">
+    <div class="field">
+      <label class="field-label">Nombre y apellido</label>
+      <input type="text" class="form-input" [(ngModel)]="form.nombre" name="nombre" required />
+    </div>
+    <div class="field">
+      <label class="field-label">Email</label>
+      <input type="email" class="form-input" [(ngModel)]="form.email" name="email" required />
+    </div>
+    <div class="field" *ngIf="!editMode">
+      <label class="field-label">DNI (contraseña inicial)</label>
+      <input type="text" class="form-input" [(ngModel)]="form.dni" name="dni" required />
+    </div>
+    <div class="field">
+      <label class="field-label">Rol</label>
+      <select class="form-select" [(ngModel)]="form.rol" name="rol">
+        <option *ngFor="let r of roles" [value]="r.value">{{ r.label }}</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+      <button type="submit" class="btn-save">{{ editMode ? 'Guardar cambios' : 'Crear usuario' }}</button>
+    </div>
+  </form>
+</div>

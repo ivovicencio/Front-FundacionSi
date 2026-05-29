@@ -1,0 +1,43 @@
+<div class="asistencia-page py-4 px-3 px-lg-5">
+  <div class="hero-panel mb-4">
+    <h1 class="hero-title">Registrar asistencia</h1>
+    <p class="hero-note">Registrá si vas a estar presente en la residencia.</p>
+  </div>
+
+  <div *ngIf="success" class="success-banner">
+    <i class="bi bi-check-circle"></i> Asistencia registrada con éxito.
+  </div>
+
+  <div *ngIf="error" class="error-banner">
+    <i class="bi bi-exclamation-circle"></i> {{ error }}
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="onSubmit()" class="asistencia-form">
+      <div class="field">
+        <label class="field-label">Fecha</label>
+        <div class="input-group">
+          <i class="bi bi-calendar-event"></i>
+          <input type="date" class="form-input" [(ngModel)]="fecha" name="fecha" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">¿Estás presente?</label>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn" [class.active]="presente" (click)="presente = true">
+            <i class="bi bi-check-lg"></i> Presente
+          </button>
+          <button type="button" class="toggle-btn" [class.active]="!presente" (click)="presente = false">
+            <i class="bi bi-x-lg"></i> Ausente
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="loading">
+        <span *ngIf="!loading">Guardar asistencia</span>
+        <span *ngIf="loading" class="spinner"></span>
+      </button>
+    </form>
+  </div>
+</div>

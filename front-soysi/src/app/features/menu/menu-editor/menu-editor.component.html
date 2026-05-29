@@ -1,0 +1,36 @@
+<div class="menu-editor-page py-4 px-3 px-lg-5">
+  <div class="hero-panel mb-4">
+    <div class="hero-inner">
+      <h1 class="hero-title">Crear menú semanal</h1>
+      <p class="hero-note">Definí el rango de fechas para el nuevo menú de la residencia.</p>
+    </div>
+  </div>
+
+  <div *ngIf="success" class="success-banner">
+    <i class="bi bi-check-circle"></i> Menú creado exitosamente.
+  </div>
+
+  <div *ngIf="error" class="error-banner">
+    <i class="bi bi-exclamation-circle"></i> {{ error }}
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="onSubmit()" class="editor-form">
+      <div class="form-row">
+        <div class="field">
+          <label class="field-label">Fecha de inicio</label>
+          <input type="date" class="form-input" [(ngModel)]="fechaInicio" name="fechaInicio" required />
+        </div>
+        <div class="field">
+          <label class="field-label">Fecha de fin</label>
+          <input type="date" class="form-input" [(ngModel)]="fechaFin" name="fechaFin" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="loading">
+        <span *ngIf="!loading">Crear menú</span>
+        <span *ngIf="loading" class="spinner"></span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,60 +1,57 @@
 import { Routes } from '@angular/router';
-
-//layouts y auth
-import { Home } from './components/layouts/home/home';
-import { AuthGuard } from './services/auth/auth.guard';
-import { Login } from './components/login/login';
-import { Register } from './components/register/register';
-
-//modulo del menu
-import { MenuView } from './components/menu/menu-view/menu-view';
-import { MenuEditor } from './components/menu/menu-editor/menu-editor';
-
-//conteos y modulos de stock
-import { ConteoMensual } from './components/stock/conteo-mensual/conteo-mensual';
-import { ConteoSemanal } from './components/stock/conteo-semanal/conteo-semanal';
-import { ConteoOcasa } from './components/stock/conteo-ocasa/conteo-ocasa';
-import { PedidosGenerados } from './components/stock/pedidos-generados/pedidos-generados';
-import { AsignarStock } from './components/asignar-stock/asignar-stock';
-import { PanelStock } from './components/stock/panel-stock/panel-stock';
-
-//modulo de asistencias
-import { AsistenciaPanel } from './components/asistencia/asistencia-panel/asistencia-panel';
-import { AsistenciaForm } from './components/asistencia/asistencia-form/asistencia-form';
-
-//modulo de encuestas
-import { Encuesta } from './components/encuesta/encuesta';
-import { Boletos } from './components/boletos/boletos';
+import { AuthGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
-     // Ruta inicial
+  {
+    path: 'login',
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'change-password',
+    loadComponent: () => import('./features/auth/change-password/change-password.component').then(m => m.ChangePasswordComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'menu/view',
+    loadComponent: () => import('./features/menu/menu-view/menu-view.component').then(m => m.MenuViewComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'menu/editor',
+    loadComponent: () => import('./features/menu/menu-editor/menu-editor.component').then(m => m.MenuEditorComponent),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'RESIDENTE_STOCK'] }
+  },
+  {
+    path: 'asistencia/form',
+    loadComponent: () => import('./features/asistencia/asistencia-form/asistencia-form.component').then(m => m.AsistenciaFormComponent),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['RESIDENTE', 'RESIDENTE_STOCK'] }
+  },
+  {
+    path: 'asistencia/panel',
+    loadComponent: () => import('./features/asistencia/asistencia-panel/asistencia-panel.component').then(m => m.AsistenciaPanelComponent),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN'] }
+  },
+  {
+    path: 'boletos/solicitud',
+    loadComponent: () => import('./features/boletos/boletos.component').then(m => m.BoletosComponent),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['RESIDENTE', 'RESIDENTE_STOCK'] }
+  },
+  {
+    path: 'usuarios',
+    loadComponent: () => import('./features/usuarios/usuario-lista/usuario-lista.component').then(m => m.UsuarioListaComponent),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN'] }
+  },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
-
-  // Dashboard Principal
-  { path: 'home', component: Home },
-
-  //  Menú
-  { path: 'menu/view', component: MenuView, canActivate: [AuthGuard] },
-  { path: 'menu/editor', component: MenuEditor, canActivate: [AuthGuard] },
-
-  //  Stock y Conteos
-  { path: 'stock/semanal', component: ConteoSemanal, canActivate: [AuthGuard] },
-  { path: 'stock/mensual', component: ConteoMensual, canActivate: [AuthGuard] },
-  { path: 'stock/ocasa', component: ConteoOcasa, canActivate: [AuthGuard] },
-  { path: 'stock/pedidos', component: PedidosGenerados, canActivate: [AuthGuard] },
-  { path: 'stock/asignar-grupo', component: AsignarStock, canActivate: [AuthGuard] },
-  { path: 'stock/panel', component: PanelStock, canActivate: [AuthGuard] },
-
-  //  Asistencias
-  { path: 'asistencia/form', component: AsistenciaForm, canActivate: [AuthGuard] },
-  { path: 'asistencia/panel', component: AsistenciaPanel, canActivate: [AuthGuard] },
-
-  //  Encuestas
-  { path: 'encuesta', component: Encuesta, canActivate: [AuthGuard] },
-  { path: 'boletos/solicitud', component: Boletos, canActivate: [AuthGuard] },
-
-  // Redirección de seguridad
   { path: '**', redirectTo: 'home' }
 ];

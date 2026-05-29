@@ -1,0 +1,43 @@
+<div class="boletos-page py-4 px-3 px-lg-5">
+  <div class="hero-panel mb-4">
+    <h1 class="hero-title">Solicitar boleto</h1>
+    <p class="hero-note">Completá los datos y enviá la solicitud por WhatsApp.</p>
+  </div>
+
+  <div *ngIf="error" class="error-banner">
+    <i class="bi bi-exclamation-circle"></i> {{ error }}
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="solicitarBoleto()" class="boleto-form">
+      <div class="field">
+        <label class="field-label">Destino</label>
+        <div class="input-group">
+          <i class="bi bi-geo-alt"></i>
+          <input type="text" class="form-input" [(ngModel)]="destino" name="destino" placeholder="Ej: Neuquén" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Fecha de viaje</label>
+        <div class="input-group">
+          <i class="bi bi-calendar-event"></i>
+          <input type="date" class="form-input" [(ngModel)]="fechaViaje" name="fechaViaje" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Observaciones <small>(opcional)</small></label>
+        <div class="input-group">
+          <i class="bi bi-chat-text"></i>
+          <textarea class="form-input textarea" [(ngModel)]="observaciones" name="observaciones" rows="3" placeholder="Motivo del viaje, detalles..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="loading">
+        <i class="bi bi-whatsapp"></i>
+        <span>Solicitar por WhatsApp</span>
+      </button>
+    </form>
+  </div>
+</div>

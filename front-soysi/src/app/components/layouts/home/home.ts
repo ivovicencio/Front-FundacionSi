@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 export class Home implements OnInit {
   usuario = {
     nombre: 'Ivo Vicencio',
-    rol: 'ADMIN'
+    rol: 'RESIDENTE_NORMAL'
   };
 
   fraseDelDia: string = "Mucha gente pequeña, en lugares pequeños, haciendo cosas pequeñas, puede cambiar el mundo.";
@@ -20,7 +20,7 @@ export class Home implements OnInit {
 
   get esAdmin(): boolean { return this.usuario.rol === 'ADMIN'; }
   get esStock(): boolean { return this.usuario.rol === 'RESIDENTE_STOCK'; }
-  get esEstudiante(): boolean { return this.usuario.rol !== 'ADMIN'; }
+  get esEstudiante(): boolean { return this.usuario.rol !== 'RESIDENTE_NORMAL'; }
   get puedeGestionarOperaciones(): boolean { 
     return this.esAdmin || this.esStock; 
   }

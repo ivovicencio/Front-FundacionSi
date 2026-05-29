@@ -1,0 +1,145 @@
+.boletos-page {
+  min-height: 100vh;
+  background: var(--fs-bg);
+}
+
+.hero-panel {
+  background: linear-gradient(135deg, var(--fs-purple-dark), var(--fs-purple));
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  color: #fff;
+}
+
+.hero-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffd800;
+  margin: 0 0 0.35rem;
+}
+
+.hero-note {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.error-banner {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  background: #fef2f2;
+  color: #b91c1c;
+  border-left: 4px solid #b91c1c;
+}
+
+.form-card {
+  background: var(--fs-white);
+  border-radius: 16px;
+  border: 1px solid var(--fs-border);
+  padding: 2rem;
+  max-width: 560px;
+}
+
+.boleto-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--fs-purple-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field-label small {
+  font-weight: 400;
+  text-transform: none;
+  color: var(--fs-muted);
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.input-group i {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  color: var(--fs-purple);
+  z-index: 2;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1.5px solid var(--fs-border);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: var(--fs-bg);
+  transition: all 0.2s;
+}
+
+.textarea {
+  padding-top: 0.75rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--fs-purple);
+  box-shadow: 0 0 0 3px rgba(106, 47, 179, 0.1);
+  background: #fff;
+}
+
+.btn-submit {
+  padding: 0.9rem 2rem;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.btn-submit i {
+  font-size: 1.3rem;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .form-card { padding: 1.25rem; }
+}

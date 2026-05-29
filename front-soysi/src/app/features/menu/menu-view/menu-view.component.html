@@ -1,0 +1,63 @@
+<div class="menu-page py-4 px-3 px-lg-5">
+  <div class="hero-panel mb-4">
+    <div class="hero-inner d-flex align-items-center justify-content-between flex-wrap gap-3">
+      <div>
+        <h1 class="hero-title">Menú semanal</h1>
+        <p class="hero-note">Consultá el menú vigente de la residencia.</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner"></div>
+    <p class="text-muted mt-2">Cargando menú...</p>
+  </div>
+
+  <div *ngIf="error" class="empty-state">
+    <i class="bi bi-exclamation-circle"></i>
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="menu && !loading" class="menu-card">
+    <div class="menu-card-accent"></div>
+    <div class="text-center mb-4">
+      <h2 class="print-title">Fundación SI — Menú Semanal</h2>
+      <p class="rango"><strong>Vigencia:</strong> {{ menu.fechaInicio }} al {{ menu.fechaFin }}</p>
+    </div>
+
+    <div class="table-scroll">
+      <table class="menu-table">
+        <thead>
+          <tr>
+            <th class="th-corner">Turno</th>
+            <th class="th-dia" *ngFor="let dia of menu.diasMenu">{{ dia.fecha }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="th-turno">Almuerzo</th>
+            <td *ngFor="let dia of menu.diasMenu">
+              <div class="celda-plato" *ngIf="dia.almuerzo" [class.celda-carne-si]="dia.conCarne" [class.celda-carne-no]="!dia.conCarne">
+                <span class="chip" [class.chip-carne]="dia.conCarne" [class.chip-veg]="!dia.conCarne">
+                  {{ getCarneLabel(dia.conCarne) }}
+                </span>
+              </div>
+              <span class="empty-plato" *ngIf="!dia.almuerzo">—</span>
+            </td>
+          </tr>
+          <tr>
+            <th class="th-turno">Cena</th>
+            <td *ngFor="let dia of menu.diasMenu">
+              <div class="celda-plato" *ngIf="!dia.almuerzo" [class.celda-carne-si]="dia.conCarne" [class.celda-carne-no]="!dia.conCarne">
+                <span class="chip" [class.chip-carne]="dia.conCarne" [class.chip-veg]="!dia.conCarne">
+                  {{ getCarneLabel(dia.conCarne) }}
+                </span>
+              </div>
+              <span class="empty-plato" *ngIf="dia.almuerzo">—</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

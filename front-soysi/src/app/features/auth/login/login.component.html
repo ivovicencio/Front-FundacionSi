@@ -1,0 +1,64 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-logo">
+        <span class="logo-letter">S</span>
+      </div>
+      <h1 class="brand-title">Soy <span class="text-yellow">Sí</span></h1>
+      <p class="brand-subtitle">Residencia Estudiantil · Fundación SI</p>
+    </div>
+
+    <div *ngIf="error" class="alert-error">
+      <i class="bi bi-exclamation-circle"></i> {{ error }}
+    </div>
+
+    <form (ngSubmit)="onLogin()" class="login-form">
+      <div class="field">
+        <label class="field-label" for="email">Email</label>
+        <div class="input-group">
+          <i class="bi bi-envelope"></i>
+          <input
+            id="email"
+            type="email"
+            class="form-input"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="ejemplo@fundacionsi.org"
+            required
+            autocomplete="email"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="dni">DNI</label>
+        <div class="input-group">
+          <i class="bi bi-card-text"></i>
+          <input
+            id="dni"
+            type="password"
+            class="form-input"
+            [(ngModel)]="dni"
+            name="dni"
+            placeholder="Tu número de DNI"
+            required
+            autocomplete="off"
+          />
+        </div>
+        <span class="field-hint">Tu contraseña inicial es tu DNI</span>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="loading">
+        <span *ngIf="!loading">Ingresar</span>
+        <span *ngIf="loading" class="spinner"></span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p class="help-text">¿Problemas con el acceso?</p>
+      <a class="whatsapp-link" href="https://wa.me/5491112345678?text=Hola%2C%20necesito%20que%20me%20registren%20en%20el%20sistema%20SoySi." target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp"></i> Contactar por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>

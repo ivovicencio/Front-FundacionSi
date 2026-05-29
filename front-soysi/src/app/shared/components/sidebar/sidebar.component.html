@@ -1,0 +1,65 @@
+<aside class="sidebar" [class.collapsed]="collapsed">
+  <div class="sidebar-header">
+    <div class="brand" routerLink="/home">
+      <span class="brand-icon">S</span>
+      <span class="brand-text" *ngIf="!collapsed">Soy<span class="text-yellow">Sí</span></span>
+    </div>
+    <button class="toggle-btn" (click)="toggleSidebar()" title="Toggle sidebar">
+      <i class="bi" [ngClass]="collapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <i class="bi bi-house-door"></i>
+      <span class="nav-label" *ngIf="!collapsed">Inicio</span>
+    </a>
+
+    <a class="nav-item" routerLink="/menu/view" routerLinkActive="active">
+      <i class="bi bi-calendar-heart"></i>
+      <span class="nav-label" *ngIf="!collapsed">Menú semanal</span>
+    </a>
+
+    <a class="nav-item" *ngIf="puedeGestionarMenu" routerLink="/menu/editor" routerLinkActive="active">
+      <i class="bi bi-pencil-square"></i>
+      <span class="nav-label" *ngIf="!collapsed">Editar menú</span>
+    </a>
+
+    <a class="nav-item" *ngIf="esResidente || esStock" routerLink="/asistencia/form" routerLinkActive="active">
+      <i class="bi bi-person-check"></i>
+      <span class="nav-label" *ngIf="!collapsed">Registrar asistencia</span>
+    </a>
+
+    <a class="nav-item" *ngIf="esAdmin" routerLink="/asistencia/panel" routerLinkActive="active">
+      <i class="bi bi-clipboard-data"></i>
+      <span class="nav-label" *ngIf="!collapsed">Panel asistencias</span>
+    </a>
+
+    <a class="nav-item" *ngIf="esResidente || esStock" routerLink="/boletos/solicitud" routerLinkActive="active">
+      <i class="bi bi-ticket-perforated"></i>
+      <span class="nav-label" *ngIf="!collapsed">Solicitar boleto</span>
+    </a>
+
+    <a class="nav-item" *ngIf="esAdmin" routerLink="/usuarios" routerLinkActive="active">
+      <i class="bi bi-people"></i>
+      <span class="nav-label" *ngIf="!collapsed">Usuarios</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-info" *ngIf="!collapsed">
+      <span class="user-avatar">{{ inicial }}</span>
+      <div class="user-details">
+        <span class="user-name">{{ nombre || 'Usuario' }}</span>
+        <span class="user-role">{{ rol === 'ADMIN' ? 'Administrador' : rol === 'RESIDENTE_STOCK' ? 'Encargado Stock' : 'Residente' }}</span>
+      </div>
+    </div>
+    <button class="logout-btn" (click)="logout()" title="Cerrar sesión">
+      <i class="bi bi-box-arrow-right"></i>
+      <span class="nav-label" *ngIf="!collapsed">Salir</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Mobile overlay -->
+<div class="sidebar-overlay" *ngIf="!collapsed" (click)="collapsed = true"></div>

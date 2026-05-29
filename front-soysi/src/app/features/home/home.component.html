@@ -1,0 +1,73 @@
+<div class="home-container">
+  <header class="home-hero">
+    <div class="hero-content">
+      <h1 class="hero-logo">Soy<span class="text-yellow">Sí</span></h1>
+      <p class="hero-subtitle">Gestión · Residencia Universitaria · Fundación SI</p>
+      <div class="welcome-box">
+        <span class="welcome-text">¡Hola, {{ nombre || 'Usuario' }}!</span>
+        <div class="quote-container">
+          <p class="quote">"{{ fraseDelDia }}"</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="quick-access-panel">
+    <div class="access-grid">
+      <div class="card-wrapper">
+        <div class="access-card" [routerLink]="puedeGestionarOperaciones ? '/menu/editor' : '/menu/view'">
+          <div class="icon-wrap purple"><i class="bi bi-calendar-heart"></i></div>
+          <div class="card-text">
+            <h3>Menú semanal</h3>
+            <p>{{ puedeGestionarOperaciones ? 'Administrar comidas' : 'Consultar menú' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-wrapper" *ngIf="!esAdmin">
+        <div class="access-card" routerLink="/asistencia/form">
+          <div class="icon-wrap purple"><i class="bi bi-person-check"></i></div>
+          <div class="card-text">
+            <h3>Asistencia</h3>
+            <p>Registrar mi asistencia</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-wrapper" *ngIf="puedePedirBoleto">
+        <div class="access-card" routerLink="/boletos/solicitud">
+          <div class="icon-wrap purple"><i class="bi bi-ticket-perforated"></i></div>
+          <div class="card-text">
+            <h3>Boletos</h3>
+            <p>Solicitar viaje vía WhatsApp</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-wrapper" *ngIf="esAdmin">
+        <div class="access-card accent" routerLink="/asistencia/panel">
+          <div class="icon-wrap dark"><i class="bi bi-clipboard-data"></i></div>
+          <div class="card-text">
+            <h3>Panel asistencias</h3>
+            <p>Control de ingresos y egresos</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-wrapper" *ngIf="esAdmin">
+        <div class="access-card" routerLink="/usuarios">
+          <div class="icon-wrap solid-purple"><i class="bi bi-people"></i></div>
+          <div class="card-text">
+            <h3>Usuarios</h3>
+            <p>Gestión de residentes y admins</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="home-footer">
+    <div class="fs-divider"></div>
+    <p>Fundación SI Argentina · Residencia Universitaria</p>
+  </footer>
+</div>

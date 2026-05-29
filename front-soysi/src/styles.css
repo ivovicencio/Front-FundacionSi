@@ -1,36 +1,21 @@
 :root {
-  /* Menú (proyecto `menu` — mismas variables que menu-component) */
-  --fs-morado: #6b338a;
-  --fs-amarillo: #f1b51c;
-  --fs-fondo: #f3f0f7;
-  --fs-font-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-
-  /* Colores Principales - Fundación Sí */
   --fs-purple: #6a2fb3;
   --fs-purple-light: #8a59cf;
   --fs-purple-dark: #4a1f80;
   --fs-yellow: #ffd800;
   --fs-yellow-light: #ffea6e;
-  
-  /* Paleta de Grises y UI */
   --fs-bg: #f8f9fa;
   --fs-ink: #212529;
   --fs-muted: #6c757d;
   --fs-white: #ffffff;
-  --fs-border: rgba(106, 47, 179, 0.15);
-  
-  /* Sombras */
+  --fs-border: rgba(106, 47, 179, 0.12);
   --fs-shadow: 0 4px 12px rgba(106, 47, 179, 0.08);
   --fs-shadow-lg: 0 8px 24px rgba(106, 47, 179, 0.12);
 }
 
-* { 
-  box-sizing: border-box; 
-}
+* { box-sizing: border-box; }
 
-html, body { 
-  height: 100%; 
-}
+html, body { height: 100%; }
 
 body {
   margin: 0;
@@ -41,20 +26,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Tipografía */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--fs-purple-dark);
   letter-spacing: -0.02em;
 }
 
-/* Contenedor*/
-.container { 
-  max-width: 1200px; 
-  margin: 0 auto; 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 1.5rem;
 }
-
 
 .fs-card {
   background: var(--fs-white);
@@ -70,7 +52,6 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--fs-shadow-lg);
 }
 
-/* Botones con los colores de la marca */
 .btn-fs-primary {
   background-color: var(--fs-purple);
   color: var(--fs-white);
@@ -95,7 +76,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.6rem 1.25rem;
 }
 
-/* Scrollbars personalizados para las listas de comida */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -113,7 +93,6 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--fs-purple-light);
 }
 
-/* Utilidad para impresión (Menú) */
 @media print {
   .no-print { display: none !important; }
   body { background: white; }

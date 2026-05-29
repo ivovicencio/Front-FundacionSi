@@ -1,0 +1,165 @@
+.asistencia-panel-page {
+  min-height: 100vh;
+  background: var(--fs-bg);
+}
+
+.hero-panel {
+  background: linear-gradient(135deg, var(--fs-purple-dark), var(--fs-purple));
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  color: #fff;
+}
+
+.hero-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffd800;
+  margin: 0 0 0.35rem;
+}
+
+.hero-note {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.panel-card {
+  background: var(--fs-white);
+  border-radius: 16px;
+  border: 1px solid var(--fs-border);
+  padding: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box, .date-box {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-box i, .date-box i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fs-purple);
+  z-index: 2;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border: 1.5px solid var(--fs-border);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  background: var(--fs-bg);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--fs-purple);
+  box-shadow: 0 0 0 3px rgba(106, 47, 179, 0.1);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--fs-border);
+  border-top-color: var(--fs-purple);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--fs-border);
+}
+
+.fs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background: var(--fs-purple-dark);
+  color: #fff;
+  padding: 0.85rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--fs-border);
+  font-size: 0.9rem;
+}
+
+.residente-name {
+  font-weight: 700;
+  color: var(--fs-purple-dark);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-badge.presente {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.ausente {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--fs-muted);
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  thead { display: none; }
+
+  tr.asistencia-row {
+    display: block;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--fs-border);
+    border-radius: 10px;
+    padding: 0.35rem;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--fs-purple);
+    font-size: 0.8rem;
+  }
+}
